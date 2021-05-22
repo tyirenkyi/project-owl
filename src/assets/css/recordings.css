@@ -1,0 +1,14 @@
+.recordings-container {
+  background-color: #FAFAFA;
+  height: 100vh;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 3%;
+}
+
+.pagination-div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
