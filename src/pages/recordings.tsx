@@ -19,6 +19,7 @@ const Recordings = () => {
         <RecordingItem />
         <RecordingItem />
         <RecordingItem />
+        <RecordingItem />
       </div>
     </div>
   )

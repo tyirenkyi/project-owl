@@ -1,9 +1,10 @@
 .recordings-container {
-  background-color: #FAFAFA;
-  height: 100vh;
+  background-color: #F9F9F9;
+  min-height: calc(100vh - 249px);
   padding-left: 6%;
   padding-right: 6%;
   padding-top: 3%;
+  padding-bottom: 6%;
 }
 
 .actions-div {
