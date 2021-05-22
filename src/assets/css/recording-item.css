@@ -1,0 +1,97 @@
+.recording-container {
+  border-radius: 5px;
+  box-shadow:  0px 0px 1px rgba(0, 0, 0, 0.02), 0px 1px 3px rgba(50, 50, 93, 0.15);
+  width: 508px;
+  position: relative;
+}
+
+.audio-visual {
+  height: 100px;
+  width: 100%;
+  background-color: #FFE4E4;
+  padding: 10px 0px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.elapsed {
+  background: white;
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin-left: 20px;
+  color: #707070;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.metadata-div {
+  height: 100px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.metadata-column {
+  display: flex;
+  flex-direction: column;
+  margin-right: 110px;
+}
+
+.metadata-column p {
+  font-size: 12px;
+  margin: 0;
+  margin-bottom: 5px;
+  color: #8B8B8B;
+}
+
+.metadata-column h5 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.timestamp {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 12px;
+  color: #8B8B8B;
+}
+
+.high-priority {
+  background-color: #FFE4E4;
+}
+
+.high-priority-label {
+  color: #D44646;
+}
+
+.low-priority {
+  background-color: #D6E9FF;
+}
+
+.low-priority-label {
+  color: #729ED1;
+}
+
+.medium-priority {
+  background-color: #FFF2C7;
+}
+
+.medium-priority-label {
+  color: #D1BB72;
+}
+
+.playback-btn {
+  outline: none;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  padding: 15px 15px;
+  position: absolute;
+  top: 37%;
+  right: 13%;
+  cursor: pointer;
+}

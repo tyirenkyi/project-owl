@@ -1,0 +1,54 @@
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.active-page-btn {
+  font-size: 12px;
+  color: #1E88E5;
+  background-color: white;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  padding: 8px 10px;
+  border: 1px solid #398FC8;
+  border-radius: 4px;
+  box-shadow:  0px 0px 1px rgba(0, 0, 0, 0.02), 0px 1px 3px rgba(50, 50, 93, 0.15);
+  font-size: 16px;
+  font-family: Nunito;
+  font-weight: 600;
+  color: #398FC8;
+  margin-right: 5px;
+}
+
+.page-count {
+  margin: 0;
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
+}
+
+.prev-page-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: #8B8B8B;
+  font-size: 14px;
+  margin-right: 12px;
+}
+
+.next-page-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: #8B8B8B;
+  font-size: 14px;
+  margin-left: 12px;
+}

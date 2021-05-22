@@ -1,0 +1,22 @@
+.tabs-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: transparent;
+}
+
+.tab {
+  background-color: #D4D4D4;
+  padding: 10px 20px;
+  border-radius: 2px;
+  color: #AAAAAA;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  margin-right: 20px;
+}
+
+.active-tab {
+  background-color: #949494;
+  color: white;
+}
