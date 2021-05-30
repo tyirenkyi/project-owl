@@ -1,4 +1,4 @@
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 import "../assets/css/nav.css";
 import uploadIcon from "../assets/images/upload.svg";
