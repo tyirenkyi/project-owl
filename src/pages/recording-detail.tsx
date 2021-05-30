@@ -4,7 +4,8 @@ import { RiEditLine } from "react-icons/ri";
 import Accordion from "react-bootstrap/Accordion";
 
 import "../assets/css/recording-detail.css";
-import ContextAwareToggle from "../components/contextAwareToggle";
+import RelatedAudioItem from "../components/related-audio-item";
+import ContextAwareToggle from "../components/context-aware-toggle";
 
 const RecordingDetail = () => {
   return(
@@ -39,7 +40,7 @@ const RecordingDetail = () => {
                 </div>
                 <div className="custom-col">
                   <p className="label">Priority</p>
-                  <p className="high-priority-label">High</p>
+                  <p className="high-priority-label col-value">High</p>
                 </div>
               </div>
               <p className="created-at">11:23</p>
@@ -64,6 +65,13 @@ const RecordingDetail = () => {
                 <span className="taxonomy-item">Data</span>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="related-media">
+          <h5>Related</h5>
+          <div className="related-media-lis">
+            <RelatedAudioItem />
+            <RelatedAudioItem />
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@
 
 .player {
   background-color: #FFE4E4;
-  width: 899px;
+  max-width: 899px;
   height: 354px;
   display: flex;
   flex-direction: row;
@@ -83,7 +83,8 @@
 }
 
 .meta {
-  width: 899px;
+  width: 100%;
+  max-width: 899px;
   margin-top: 30px;
 }
 
@@ -121,7 +122,6 @@
 .col-value {
   font-size: 20px;
   font-weight: 600;
-  color: #3A3A3A;
   margin: 0;
   margin-right: 15px;
 }
@@ -142,10 +142,12 @@
 
 .transcription-div {
   margin-top: 20px;
+  width: 100%;
 }
 
 .taxonomy {
-  width: 899px;
+  max-width: 899px;
+  min-width: 500px;
   margin-top: 50px;
 }
 
@@ -164,4 +166,34 @@
   border-radius: 25px;
   margin-right: 10px;
   font-size: 14px;
+}
+
+.related-media {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+}
+
+.related-media h5 {
+  font-size: 20px;
+  color: #3A3A3A;
+  font-weight: 500;
+}
+
+.related-media-list {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.related-media-list::-webkit-scrollbar {
+  display: none;
+}
+
+.transcription {
+  width: 100%;
+  max-width: 899px;
+  min-width: 500px;
+  margin-top: 10px;
 }

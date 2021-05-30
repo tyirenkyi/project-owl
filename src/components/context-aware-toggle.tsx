@@ -3,7 +3,7 @@ import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import AccordionContext from "react-bootstrap/AccordionContext";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-import "../assets/css/contextAwareToggle.css";
+import "../assets/css/context-aware-toggle.css";
 
 const ContextAwareToggle = (props: any) => {
   const currentEventKey = useContext(AccordionContext);
