@@ -14,6 +14,7 @@
   align-items: center;
   padding-left: 6%;
   padding-right: 6%;
+  position: relative;
 }
 
 .nav-container h2 {
@@ -85,4 +86,8 @@
   border-radius: 5px;
   background-color: white;
   cursor: pointer;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
