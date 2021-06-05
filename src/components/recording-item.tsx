@@ -1,4 +1,3 @@
-import { BsPauseFill } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 
 import "../assets/css/recording-item.css";

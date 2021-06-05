@@ -8,7 +8,7 @@ import uploadIcon from "../assets/images/upload.svg";
 import visualizer from "../assets/images/visualizer.svg";
 
 const Upload = (props: any) => {
-  const [status, setStatus] = useState<string>('empty');
+  const [status] = useState<string>('empty');
 
   return (
     <div className="upload-container">
