@@ -2,15 +2,21 @@ import { FaPlay } from "react-icons/fa";
 
 import "../assets/css/related-audio.css";
 
-const RelatedAudioItem = () => {
+const RelatedAudioItem = (props: any) => {
   return(
     <div className="related-audio-item">
-      <div className="related-audio-player">
+      <div 
+        className={`related-audio-player 
+          ${props.data.priority === 'High' && 'high-priority'}
+          ${props.data.priority === 'Low' && 'low-priority'}
+          ${props.data.priority === 'Medium' && 'medium-priority'}`
+        }  
+      >
         <button>
           <FaPlay />
         </button>
-        <span>00:15</span>
       </div>
+      <span>00:15</span>
       <div className="related-audio-meta">
         <p className="related-audio-label">Issue Type</p>
         <p className="related-audio-col-value">Internet Connectivity</p>

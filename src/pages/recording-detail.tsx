@@ -7,6 +7,10 @@ import "../assets/css/recording-detail.css";
 import RelatedAudioItem from "../components/related-audio-item";
 import ContextAwareToggle from "../components/context-aware-toggle";
 
+const mock = [
+  { priority: 'High' }, { priority: 'Medium' }, { priority: 'Low' }, { priority: 'High' },
+]
+
 const RecordingDetail = () => {
   return(
     <div className="detail-container">
@@ -70,8 +74,9 @@ const RecordingDetail = () => {
         <div className="related-media">
           <h5>Related</h5>
           <div className="related-media-lis">
-            <RelatedAudioItem />
-            <RelatedAudioItem />
+            {mock.map((item, index) => (
+              <RelatedAudioItem data={item} key={index} />
+            ))}
           </div>
         </div>
       </div>
