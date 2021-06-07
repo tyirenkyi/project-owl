@@ -143,7 +143,7 @@ const RecordingDetail = () => {
           <h5>Related</h5>
           <div className="related-media-lis">
             {mock.map((item, index) => (
-              <RelatedAudioItem data={item} key={index} />
+              <RelatedAudioItem data={item} key={index} id={index}/>
             ))}
           </div>
         </div>

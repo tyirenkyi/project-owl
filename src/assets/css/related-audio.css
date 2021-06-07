@@ -12,10 +12,11 @@
   height: 141px;
   border-radius: 6px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
   filter: brightness(0.76);
+  padding-top: 10px;
 }
 
 .related-audio-item span {
@@ -33,7 +34,7 @@
   top: 10px;
 }
 
-.related-audio-player button{
+.related-audio-item button{
   outline: none;
   border: none;
   background-color: #242424;
@@ -44,10 +45,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.related-audio-player button:hover {
-  color: #FF7474;
+  position: absolute;
+  top: 40%;
+  left: 20%;
+  z-index: 10;
 }
 
 .related-audio-meta {
@@ -73,6 +74,7 @@
 
 .high-priority {
   background-color: #FFE4E4;
+  filter: none;
 }
 
 .high-priority-label {
