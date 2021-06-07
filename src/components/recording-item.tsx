@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { FaPlay } from "react-icons/fa";
 
 import "../assets/css/recording-item.css";
+import Visualizer from "../components/visualizer";
 
 const RecordingItem = (props: any) => {
+  const [playAudio, setPlayAudio] = useState(false);
   return (
     <div className="recording-container">
       <div 
@@ -12,6 +15,7 @@ const RecordingItem = (props: any) => {
           ${props.data.priority === 'Medium' && 'medium-priority'}`
         }
       >
+        <Visualizer play={playAudio}/>
       </div>
       <span className="elapsed">00:15</span>
       <div className="metadata-div">
