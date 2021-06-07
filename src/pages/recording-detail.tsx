@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { FaChevronLeft, FaPlay } from "react-icons/fa";
 import { RiEditLine } from "react-icons/ri";
 import Accordion from "react-bootstrap/Accordion";
@@ -7,12 +8,18 @@ import "../assets/css/recording-detail.css";
 import RelatedAudioItem from "../components/related-audio-item";
 import ContextAwareToggle from "../components/context-aware-toggle";
 
+const mock = [
+  { priority: 'High' }, { priority: 'Medium' }, { priority: 'Low' }, { priority: 'High' },
+]
+
 const RecordingDetail = () => {
   return(
     <div className="detail-container">
-      <button className="go-back-btn">
-        <FaChevronLeft /> Back to Homepage
-      </button>
+      <Link to="/">
+        <button className="go-back-btn">
+          <FaChevronLeft /> Back to Homepage
+        </button>
+      </Link>
       <div className="detail-content">
         <div className="player-and-meta">
           <div className="player">
@@ -70,8 +77,9 @@ const RecordingDetail = () => {
         <div className="related-media">
           <h5>Related</h5>
           <div className="related-media-lis">
-            <RelatedAudioItem />
-            <RelatedAudioItem />
+            {mock.map((item, index) => (
+              <RelatedAudioItem data={item} key={index} />
+            ))}
           </div>
         </div>
       </div>

@@ -8,20 +8,23 @@
 .audio-visual {
   height: 100px;
   width: 100%;
-  background-color: #FFE4E4;
+  background-color: #FFF2C7;
   padding: 10px 0px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  filter: brightness(0.76);
 }
 
 .elapsed {
   background: white;
   border-radius: 15px;
   padding: 5px 10px;
-  margin-left: 20px;
   color: #707070;
   font-size: 12px;
   font-weight: 600;
+  position: absolute;
+  top: 10px;
+  left: 20px;
 }
 
 .metadata-div {
@@ -61,6 +64,7 @@
 
 .high-priority {
   background-color: #FFE4E4;
+  filter: none;
 }
 
 .high-priority-label {

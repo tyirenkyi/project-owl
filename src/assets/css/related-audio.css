@@ -3,6 +3,7 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .related-audio-player {
@@ -14,9 +15,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  filter: brightness(0.76);
 }
 
-.related-audio-player span {
+.related-audio-item span {
   background-color: white;
   color: #4D4D4D;
   font-size: 12px;
@@ -67,6 +69,30 @@
   margin: 0;
   margin-right: 15px;
   margin-bottom: 10px;
+}
+
+.high-priority {
+  background-color: #FFE4E4;
+}
+
+.high-priority-label {
+  color: #D44646;
+}
+
+.low-priority {
+  background-color: #D6E9FF;
+}
+
+.low-priority-label {
+  color: #729ED1;
+}
+
+.medium-priority {
+  background-color: #FFF2C7;
+}
+
+.medium-priority-label {
+  color: #D1BB72;
 }
 
 @media only screen and (max-width: 1324px) {

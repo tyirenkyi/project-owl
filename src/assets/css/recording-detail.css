@@ -7,6 +7,10 @@
   padding-bottom: 6%;
 }
 
+.detail-container a:hover {
+  text-decoration: none;
+}
+
 .go-back-btn {
   outline: none;
   border: none;
