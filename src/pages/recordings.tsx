@@ -9,6 +9,11 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 import axios from 'axios';
 import { NotifyModel } from '../models/models';
 
+const mock = [
+  { priority: 'High' }, { priority: 'Medium' }, { priority: 'Low' }, { priority: 'High' },
+  { priority: 'Low' }, { priority: 'Medium' }, { priority: 'High' }, { priority: 'Medium' }
+]
+
 const Recordings = () => {
 
   function getAxiosConfig() {
@@ -63,13 +68,9 @@ const Recordings = () => {
         <Pagination />
       </div>
       <div className="recordings-list">
-        <RecordingItem />
-        <RecordingItem />
-        <RecordingItem />
-        <RecordingItem />
-        <RecordingItem />
-        <RecordingItem />
-        <RecordingItem />
+        {mock.map((item, index) => (
+          <RecordingItem data={item} key={index} />
+        ))}
       </div>
     </div>
   )
