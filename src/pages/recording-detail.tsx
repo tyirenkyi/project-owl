@@ -20,6 +20,7 @@ const RecordingDetail = () => {
   const [displayDuration, setDisplayDuration] = useState<string>('');
   const [elapsed, setElapsed] = useState<number>(0);
   const [displayElapsed, setDisplayElapsed] = useState<string>('');
+  const [playBtn, setPlayBtn] = useState<string>('play');
 
   const handlePlayPress = () => {
     setPlayAudio(!playAudio)
@@ -31,6 +32,10 @@ const RecordingDetail = () => {
 
   const cacheDuration = (length: number) => {
     setDuration(length)
+  }
+
+  const togglePlayIcon = (icon: string) => {
+    setPlayBtn(icon);
   }
 
   const sanitizeDuration = useCallback(() => {
@@ -79,12 +84,13 @@ const RecordingDetail = () => {
                 barGap={4}
                 cacheDuration={cacheDuration}
                 updateElapsedUI={updateElapsedUI}
+                togglePlayIcon={togglePlayIcon}
               />
             </div>
             <div className="controls">
               <button className="play-btn" onClick={handlePlayPress}>
-                {!playAudio && (<FaPlay size={20}/>)}
-                {playAudio && (<BsPauseFill size={20}/>)}
+                {playBtn === 'play' && (<FaPlay size={20}/>)}
+                {playBtn === 'pause' && (<BsPauseFill size={20}/>)}
               </button>
               <span className="elapsed-span">
                 <p className="elapsed-text">{displayElapsed}</p> - {` `} 

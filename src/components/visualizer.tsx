@@ -10,7 +10,8 @@ interface VisualizerProps {
   cacheDuration?: any,
   height?: number,
   barGap?: number,
-  updateElapsedUI?: any
+  updateElapsedUI?: any,
+  togglePlayIcon?: any
 }
 
 class Visualizer extends React.Component<VisualizerProps> {
@@ -24,7 +25,8 @@ class Visualizer extends React.Component<VisualizerProps> {
     cacheDuration: Requireable<any>,
     height: Requireable<number>,
     barGap: Requireable<number>,
-    updateElapsedUI: Requireable<any>
+    updateElapsedUI: Requireable<any>,
+    togglePlayIcon: Requireable<any>
   }
 
   constructor(props: any) {
@@ -37,6 +39,10 @@ class Visualizer extends React.Component<VisualizerProps> {
     this.getDuration();
     if(this.props.updateElapsedUI)
       this.trackElaspsedTime();
+    
+    this.onFinish();
+    this.onPause();
+    this.onPlay();
   }
 
   componentDidUpdate(prevProps: any) {
@@ -68,6 +74,24 @@ class Visualizer extends React.Component<VisualizerProps> {
       'audioprocess', () => this.props.updateElapsedUI(this.waveform.getCurrentTime()))
   }
 
+  onPlay() {
+    this.waveform.on(
+      'play', () => this.props.togglePlayIcon('pause')
+    )
+  }
+
+  onPause() {
+    this.waveform.on(
+      'pause', () => this.props.togglePlayIcon('play')
+    )
+  }
+
+  onFinish() {
+    this.waveform.on(
+      'finish', () => this.props.togglePlayIcon('play')
+    )
+  }
+
   render() {
     const url = 'https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3';
 
@@ -86,7 +110,8 @@ Visualizer.propTypes = {
   cacheDuration: PropTypes.any,
   height: PropTypes.number,
   barGap: PropTypes.number,
-  updateElapsedUI: PropTypes.any
+  updateElapsedUI: PropTypes.any,
+  togglePlayIcon: PropTypes.any
 }
 
 export default Visualizer;

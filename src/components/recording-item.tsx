@@ -9,6 +9,7 @@ const RecordingItem = (props: any) => {
   const [playAudio, setPlayAudio] = useState(false);
   const [duration, setDuration] = useState<number>(0);
   const [displayDuration, setDisplayDuration] = useState<string>('');
+  const [playBtn, setPlayBtn] = useState<string>('play');
 
   const handlePlayPress = () => {
     setPlayAudio(!playAudio)
@@ -16,6 +17,10 @@ const RecordingItem = (props: any) => {
 
   const cacheDuration = (length: number) => {
     setDuration(length)
+  }
+
+  const togglePlayIcon = (icon: string) => {
+    setPlayBtn(icon);
   }
 
   const sanitizeDuration = useCallback(() => {
@@ -26,8 +31,6 @@ const RecordingItem = (props: any) => {
     } else {
       setDisplayDuration(`00:${Math.trunc(duration!)}`);
     }
-    
-
   }, [duration])
 
   useEffect(() => {
@@ -43,7 +46,12 @@ const RecordingItem = (props: any) => {
           ${props.data.priority === 'Medium' && 'medium-priority'}`
         }
       >
-        <Visualizer play={playAudio} id={props.id} cacheDuration={cacheDuration}/>
+        <Visualizer 
+          play={playAudio} 
+          id={props.id} 
+          cacheDuration={cacheDuration}
+          togglePlayIcon={togglePlayIcon}
+        />
       </div>
       <span className="elapsed">{displayDuration}</span>
       <div className="metadata-div">
@@ -69,8 +77,8 @@ const RecordingItem = (props: any) => {
         style={playAudio ? {background: 'white'}:{}}
         onClick={handlePlayPress}
       >
-        {!playAudio && (<FaPlay size={18}/>)}
-        {playAudio && (<BsPauseFill size={38} color="black"/>)}
+        {playBtn === 'play' && (<FaPlay size={20}/>)}
+        {playBtn === 'pause' && (<BsPauseFill size={38} color={'#000'}/>)}
       </button>
     </div>
   )
