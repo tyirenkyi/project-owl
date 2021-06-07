@@ -69,7 +69,7 @@ const Recordings = () => {
       </div>
       <div className="recordings-list">
         {mock.map((item, index) => (
-          <RecordingItem data={item} key={index} />
+          <RecordingItem data={item} key={index} id={index}/>
         ))}
       </div>
     </div>
