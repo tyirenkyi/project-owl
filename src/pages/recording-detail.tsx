@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { FaChevronLeft, FaPlay } from "react-icons/fa";
 import { RiEditLine } from "react-icons/ri";
 import Accordion from "react-bootstrap/Accordion";
@@ -14,9 +15,11 @@ const mock = [
 const RecordingDetail = () => {
   return(
     <div className="detail-container">
-      <button className="go-back-btn">
-        <FaChevronLeft /> Back to Homepage
-      </button>
+      <Link to="/">
+        <button className="go-back-btn">
+          <FaChevronLeft /> Back to Homepage
+        </button>
+      </Link>
       <div className="detail-content">
         <div className="player-and-meta">
           <div className="player">
