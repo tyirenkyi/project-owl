@@ -6,15 +6,18 @@ import WaveSurfer from 'wavesurfer.js';
 import "../assets/css/visualizer.css";
 
 interface VisualizerProps {
-  play: boolean
+  play: boolean,
+  id: number,
 }
 
 class Visualizer extends React.Component<VisualizerProps> {
   audioTrack: any = null!;
   waveform: WaveSurfer = null!;
+  track: HTMLAudioElement = null!;
 
   static propTypes: {
-    play: Requireable<boolean>
+    play: Requireable<boolean>,
+    id: Requireable<number>
   }
 
   constructor(props: any) {
@@ -23,29 +26,31 @@ class Visualizer extends React.Component<VisualizerProps> {
   }
 
   componentDidMount() {
+    this.track = document.querySelector(`#track${this.props.id}`)!;
+
     this.waveform = WaveSurfer.create({
       barWidth: 1,
       cursorWidth: 1,
-      container: '#waveform',
+      container: `#waveform${this.props.id}`,
       backend: 'WebAudio',
-      height: 80,
+      height: 90,
       progressColor: '#D44646',
       responsive: true,
       waveColor: '#707070',
       cursorColor: 'transparent'
     })
 
-    this.waveform.load(this.audioTrack);
+    this.waveform.load(this.audioTrack.current);
   }
 
   componentDidUpdate(prevProps: any) {
     if(this.props.play !== prevProps.play) {
-      this.waveform.playpause();
+      this.waveform.playPause();
     }
   }
 
   handlePlayPause() {
-    this.waveform.playpause();
+    this.waveform.playPause();
   }
 
   render() {
@@ -53,15 +58,16 @@ class Visualizer extends React.Component<VisualizerProps> {
 
     return(
       <div className="visualizer">
-        <div className="wave" id="waveform" />
-        <audio id="track" ref={this.audioTrack} src={url} />
+        <div className="wave" id={`waveform${this.props.id}`} />
+        <audio id={`track${this.props.id}`} ref={this.audioTrack} src={url} />
       </div>
     )
   }
 }
 
 Visualizer.propTypes = {
-  play: PropTypes.bool
+  play: PropTypes.bool,
+  id: PropTypes.number
 }
 
 export default Visualizer;
