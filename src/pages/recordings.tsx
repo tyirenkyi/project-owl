@@ -58,7 +58,7 @@ const Recordings = () => {
           .catch(console.error);
     })
     .catch(alert)      
-  }, []);
+  }, [getConnectionInfo]);
 
 
   return (
