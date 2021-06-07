@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { BsPauseFill } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 
@@ -7,10 +7,32 @@ import Visualizer from "../components/visualizer";
 
 const RecordingItem = (props: any) => {
   const [playAudio, setPlayAudio] = useState(false);
+  const [duration, setDuration] = useState<number>(0);
+  const [displayDuration, setDisplayDuration] = useState<string>('');
 
   const handlePlayPress = () => {
     setPlayAudio(!playAudio)
   }
+
+  const cacheDuration = (length: number) => {
+    setDuration(length)
+  }
+
+  const sanitizeDuration = useCallback(() => {
+    if(duration! > 60) {
+      const seconds = duration! % 60;
+      const minutes = Math.trunc(duration! / 60);
+      setDisplayDuration(`${minutes}:${seconds}`)
+    } else {
+      setDisplayDuration(`00:${Math.trunc(duration!)}`);
+    }
+    
+
+  }, [duration])
+
+  useEffect(() => {
+    sanitizeDuration();
+  }, [duration, sanitizeDuration])
 
   return (
     <div className="recording-container">
@@ -21,9 +43,9 @@ const RecordingItem = (props: any) => {
           ${props.data.priority === 'Medium' && 'medium-priority'}`
         }
       >
-        <Visualizer play={playAudio} id={props.id}/>
+        <Visualizer play={playAudio} id={props.id} cacheDuration={cacheDuration}/>
       </div>
-      <span className="elapsed">00:15</span>
+      <span className="elapsed">{displayDuration}</span>
       <div className="metadata-div">
         <div className="metadata-column">
           <p>Issue Type</p>
@@ -31,7 +53,14 @@ const RecordingItem = (props: any) => {
         </div>
         <div  className="metadata-column">
           <p>Priority</p>
-          <h5 className="high-priority-label">High</h5>
+          <h5 
+            className={`
+            ${props.data.priority === 'High' && 'high-priority-label'}
+            ${props.data.priority === 'Low' && 'low-priority-label'}
+            ${props.data.priority === 'Medium' && 'medium-priority-label'}`
+            }
+          >
+              {props.data.priority}</h5>
         </div>
         <span className="timestamp">11:23</span>
       </div>

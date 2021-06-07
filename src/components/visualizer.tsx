@@ -8,6 +8,7 @@ import "../assets/css/visualizer.css";
 interface VisualizerProps {
   play: boolean,
   id: number,
+  cacheDuration: any
 }
 
 class Visualizer extends React.Component<VisualizerProps> {
@@ -17,7 +18,8 @@ class Visualizer extends React.Component<VisualizerProps> {
 
   static propTypes: {
     play: Requireable<boolean>,
-    id: Requireable<number>
+    id: Requireable<number>,
+    cacheDuration: Requireable<any>
   }
 
   constructor(props: any) {
@@ -29,18 +31,12 @@ class Visualizer extends React.Component<VisualizerProps> {
     this.track = document.querySelector(`#track${this.props.id}`)!;
 
     this.waveform = WaveSurfer.create({
-      barWidth: 1,
-      cursorWidth: 1,
-      container: `#waveform${this.props.id}`,
-      backend: 'WebAudio',
-      height: 90,
-      progressColor: '#D44646',
-      responsive: true,
-      waveColor: '#707070',
-      cursorColor: 'transparent'
-    })
+      barWidth: 1, cursorWidth: 1, container: `#waveform${this.props.id}`,
+      backend: 'WebAudio', height: 130, progressColor: '#D44646',
+      responsive: true, waveColor: '#000000', cursorColor: 'transparent', barGap: 2.5})
 
     this.waveform.load(this.audioTrack.current);
+    this.waveform.on('ready', () => this.props.cacheDuration(this.waveform.getDuration()))
   }
 
   componentDidUpdate(prevProps: any) {
@@ -67,7 +63,8 @@ class Visualizer extends React.Component<VisualizerProps> {
 
 Visualizer.propTypes = {
   play: PropTypes.bool,
-  id: PropTypes.number
+  id: PropTypes.number,
+  cacheDuration: PropTypes.any
 }
 
 export default Visualizer;
