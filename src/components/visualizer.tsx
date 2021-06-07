@@ -2,13 +2,15 @@ import React, { Requireable } from 'react';
 import PropTypes from 'prop-types';
 import WaveSurfer from 'wavesurfer.js';
 
-
 import "../assets/css/visualizer.css";
 
 interface VisualizerProps {
   play: boolean,
   id: number,
-  cacheDuration: any
+  cacheDuration?: any,
+  height?: number,
+  barGap?: number,
+  updateElapsedUI?: any
 }
 
 class Visualizer extends React.Component<VisualizerProps> {
@@ -19,7 +21,10 @@ class Visualizer extends React.Component<VisualizerProps> {
   static propTypes: {
     play: Requireable<boolean>,
     id: Requireable<number>,
-    cacheDuration: Requireable<any>
+    cacheDuration: Requireable<any>,
+    height: Requireable<number>,
+    barGap: Requireable<number>,
+    updateElapsedUI: Requireable<any>
   }
 
   constructor(props: any) {
@@ -28,15 +33,10 @@ class Visualizer extends React.Component<VisualizerProps> {
   }
 
   componentDidMount() {
-    this.track = document.querySelector(`#track${this.props.id}`)!;
-
-    this.waveform = WaveSurfer.create({
-      barWidth: 1, cursorWidth: 1, container: `#waveform${this.props.id}`,
-      backend: 'WebAudio', height: 130, progressColor: '#D44646',
-      responsive: true, waveColor: '#000000', cursorColor: 'transparent', barGap: 2.5})
-
-    this.waveform.load(this.audioTrack.current);
-    this.waveform.on('ready', () => this.props.cacheDuration(this.waveform.getDuration()))
+    this.initializeWaveSurfer();
+    this.getDuration();
+    if(this.props.updateElapsedUI)
+      this.trackElaspsedTime();
   }
 
   componentDidUpdate(prevProps: any) {
@@ -47,6 +47,25 @@ class Visualizer extends React.Component<VisualizerProps> {
 
   handlePlayPause() {
     this.waveform.playPause();
+  }
+
+  initializeWaveSurfer() {
+    this.waveform = WaveSurfer.create({
+      barWidth: 1, cursorWidth: 1, container: `#waveform${this.props.id}`,
+      backend: 'WebAudio', height: this.props.height ? this.props.height : 130, 
+      progressColor: '#D44646', responsive: true, waveColor: '#000000', 
+      cursorColor: 'transparent', barGap: this.props.barGap ? this.props.barGap : 2.5})
+
+    this.waveform.load(this.audioTrack.current);
+  }
+
+  getDuration() {
+    this.waveform.on('ready', () => this.props.cacheDuration(this.waveform.getDuration()))
+  }
+
+  trackElaspsedTime() {
+    this.waveform.on(
+      'audioprocess', () => this.props.updateElapsedUI(this.waveform.getCurrentTime()))
   }
 
   render() {
@@ -64,7 +83,10 @@ class Visualizer extends React.Component<VisualizerProps> {
 Visualizer.propTypes = {
   play: PropTypes.bool,
   id: PropTypes.number,
-  cacheDuration: PropTypes.any
+  cacheDuration: PropTypes.any,
+  height: PropTypes.number,
+  barGap: PropTypes.number,
+  updateElapsedUI: PropTypes.any
 }
 
 export default Visualizer;

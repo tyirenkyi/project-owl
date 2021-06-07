@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import { FaPlay } from "react-icons/fa";
 
 import "../assets/css/related-audio.css";
+import Visualizer from './visualizer';
 
 const RelatedAudioItem = (props: any) => {
+  const [play, setPlay] = useState(false);
+
+  const handlePlayPress = () => {
+    setPlay(!play)
+  }
+
   return(
     <div className="related-audio-item">
       <div 
@@ -12,7 +20,8 @@ const RelatedAudioItem = (props: any) => {
           ${props.data.priority === 'Medium' && 'medium-priority'}`
         }  
       >
-        <button>
+        <Visualizer play={play} id={props.key}/>
+        <button onClick={handlePlayPress}>
           <FaPlay />
         </button>
       </div>
