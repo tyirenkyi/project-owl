@@ -169,3 +169,8 @@ select::-ms-expand {
   top: -20px;
   right: -35px;
 }
+
+.custom-alert {
+  position: absolute;
+  top: 40px;
+}
