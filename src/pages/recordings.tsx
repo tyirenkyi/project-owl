@@ -4,7 +4,7 @@ import Tabs from "../components/tabs";
 import RecordingItem from "../components/recording-item";
 
 import "../assets/css/recordings.css";
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import axios from 'axios';
 import { NotifyModel } from '../models/models';
@@ -23,10 +23,10 @@ const Recordings = () => {
     return config;
   }
 
-  function getConnectionInfo() {
-    return axios.post(`http://localhost:7071/api/negotiate`, null, getAxiosConfig())
+  const getConnectionInfo = useCallback(() => {
+    return axios.post(`https://projectowl.azurewebsites.net/api/negotiate`, null, getAxiosConfig())
       .then(resp => resp.data);
-  }
+  }, [])
 
   function updateList(data: NotifyModel){
     console.log(data)
