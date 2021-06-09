@@ -4,8 +4,13 @@ import { FaPlay } from "react-icons/fa";
 
 import "../assets/css/recording-item.css";
 import Visualizer from "../components/visualizer";
+import { AudioModel } from "../models/models";
 
-const RecordingItem = (props: any) => {
+interface RecordingItemProps {
+  data: AudioModel
+}
+
+const RecordingItem = (props: RecordingItemProps) => {
   const [playAudio, setPlayAudio] = useState(false);
   const [duration, setDuration] = useState<number>(0);
   const [displayDuration, setDisplayDuration] = useState<string>('');
@@ -48,7 +53,7 @@ const RecordingItem = (props: any) => {
       >
         <Visualizer 
           play={playAudio} 
-          id={props.id} 
+          id={props.data.id} 
           cacheDuration={cacheDuration}
           togglePlayIcon={togglePlayIcon}
         />
@@ -56,8 +61,8 @@ const RecordingItem = (props: any) => {
       <span className="elapsed">{displayDuration}</span>
       <div className="metadata-div">
         <div className="metadata-column">
-          <p>Issue Type</p>
-          <h5>Internet Connectivity</h5>
+          <p></p>
+          <h5>{props.data.issue}</h5>
         </div>
         <div  className="metadata-column">
           <p>Priority</p>
@@ -70,7 +75,7 @@ const RecordingItem = (props: any) => {
           >
               {props.data.priority}</h5>
         </div>
-        <span className="timestamp">11:23</span>
+        <span className="timestamp">{props.data.created}</span>
       </div>
       <button 
         className="playback-btn" 

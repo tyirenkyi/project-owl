@@ -2,19 +2,20 @@ import '../assets/css/recordings.css';
 import Pagination from "../components/pagination";
 import Tabs from "../components/tabs";
 import RecordingItem from "../components/recording-item";
+import Ripple from "../components/ripple";
+import { NotifyModel, AudioModel } from '../models/models';
+import { fetchAudioList } from "../services/fetch-audio";
+import { parseAudioJsonList } from "../utils";
 
 import "../assets/css/recordings.css";
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import axios from 'axios';
-import { NotifyModel } from '../models/models';
 
-const mock = [
-  { priority: 'High' }, { priority: 'Medium' }, { priority: 'Low' }, { priority: 'High' },
-  { priority: 'Low' }, { priority: 'Medium' }, { priority: 'High' }, { priority: 'Medium' }
-]
 
 const Recordings = () => {
+  const [audioList, setAudioList] = useState<AudioModel[]>([]);
+  const [busy, setBusy] = useState<boolean>(false);
 
   function getAxiosConfig() {
     const config = {
@@ -23,7 +24,7 @@ const Recordings = () => {
     return config;
   }
 
-  const getConnectionInfo = useCallback(() => {
+  const getConnectionInfo = useCallback(async() => {
     return axios.post(`https://projectowl.azurewebsites.net/api/negotiate`, null, getAxiosConfig())
       .then(resp => resp.data);
   }, [])
@@ -60,6 +61,26 @@ const Recordings = () => {
     .catch(alert)      
   }, [getConnectionInfo]);
 
+  const loadAudioList = useCallback(async() => {
+    setBusy(true);
+    try {
+      const response = await fetchAudioList();
+      parseAudioData(response);
+      setBusy(false);
+    } catch (error) {
+      setBusy(false);
+    }
+  }, [])
+
+  const parseAudioData = (json: any) => {
+    const { data } = json;
+    const parsedAudioList = parseAudioJsonList(data);
+    setAudioList(parsedAudioList);
+  }
+
+  useEffect(() => {
+    loadAudioList()
+  }, [loadAudioList])
 
   return (
     <div className="recordings-container">
@@ -67,11 +88,21 @@ const Recordings = () => {
         <Tabs />
         <Pagination />
       </div>
-      <div className="recordings-list">
-        {mock.map((item, index) => (
-          <RecordingItem data={item} key={index} id={index}/>
-        ))}
-      </div>
+      {busy && (
+        <div 
+          style={{height: 'calc(100vh - 400px)', display: 'flex', 
+          alignItems: 'center', justifyContent: 'center'}}
+        >
+          <Ripple color="#000"/>
+        </div>
+      )}
+      {!busy &&  (
+        <div className="recordings-list">
+          {audioList.map((item) => (
+            <RecordingItem  data={item}/>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
