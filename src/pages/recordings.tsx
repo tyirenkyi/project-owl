@@ -1,8 +1,10 @@
+import { Status } from '../enums';
 import '../assets/css/recordings.css';
 import Pagination from "../components/pagination";
 import Tabs from "../components/tabs";
 import RecordingItem from "../components/recording-item";
 import Ripple from "../components/ripple";
+import emptyList from "../assets/images/empty-mailbox.png";
 import { NotifyModel, AudioModel, PaginationModel } from '../models/models';
 import { fetchAudioList, paginationFetch } from "../services/fetch-audio";
 import { parseAudioJsonList, parsePaginationJson } from "../utils";
@@ -11,7 +13,6 @@ import "../assets/css/recordings.css";
 import { useCallback, useEffect, useState } from 'react';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import axios from 'axios';
-import { Status } from '../enums';
 
 
 const Recordings = () => {
@@ -148,11 +149,18 @@ const Recordings = () => {
           <Ripple color="#000"/>
         </div>
       )}
-      {!busy &&  (
+      {!busy && audioList.length > 0 && (
         <div className="recordings-list">
           {audioList.map((item) => (
             <RecordingItem  data={item}/>
           ))}
+        </div>
+      )}
+
+      {!busy && audioList.length === 0 && (
+        <div className="empty-recordings-div">
+          <img src={emptyList} alt='empty mailbox' />
+          <p>No recordings found</p>
         </div>
       )}
     </div>
