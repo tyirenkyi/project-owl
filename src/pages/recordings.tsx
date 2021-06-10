@@ -3,9 +3,9 @@ import Pagination from "../components/pagination";
 import Tabs from "../components/tabs";
 import RecordingItem from "../components/recording-item";
 import Ripple from "../components/ripple";
-import { NotifyModel, AudioModel } from '../models/models';
-import { fetchAudioList } from "../services/fetch-audio";
-import { parseAudioJsonList } from "../utils";
+import { NotifyModel, AudioModel, PaginationModel } from '../models/models';
+import { fetchAudioList, paginationFetch } from "../services/fetch-audio";
+import { parseAudioJsonList, parsePaginationJson } from "../utils";
 
 import "../assets/css/recordings.css";
 import { useCallback, useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ import axios from 'axios';
 const Recordings = () => {
   const [audioList, setAudioList] = useState<AudioModel[]>([]);
   const [busy, setBusy] = useState<boolean>(false);
+  const [paginationData, setPaginationData] = useState<PaginationModel>(PaginationModel.emptyInstance());
 
   function getAxiosConfig() {
     const config = {
@@ -67,6 +68,7 @@ const Recordings = () => {
       const response = await fetchAudioList();
       parseAudioData(response);
       setBusy(false);
+      setPaginationData(parsePaginationJson(response))
     } catch (error) {
       setBusy(false);
     }
@@ -78,6 +80,30 @@ const Recordings = () => {
     setAudioList(parsedAudioList);
   }
 
+  const handlePreviousBtnPress = async(params: string) => {
+    setBusy(true);
+    try {
+      const response = await paginationFetch(params);
+      parseAudioData(response);
+      setBusy(false);
+      setPaginationData(parsePaginationJson(response))
+    } catch (error) {
+      setBusy(false);
+    }
+  }
+
+  const handleNextBtnPress = async(params: string) => {
+    setBusy(true)
+    try {
+      const response = await paginationFetch(params);
+      parseAudioData(response);
+      setBusy(false);
+      setPaginationData(parsePaginationJson(response))
+    } catch (error) {
+      setBusy(false);
+    }
+  }
+
   useEffect(() => {
     loadAudioList()
   }, [loadAudioList])
@@ -86,7 +112,11 @@ const Recordings = () => {
     <div className="recordings-container">
       <div className="actions-div">
         <Tabs />
-        <Pagination />
+        <Pagination 
+          data={paginationData!} 
+          handleNextBtnPress={handleNextBtnPress} 
+          handlePreviousBtnPress={handlePreviousBtnPress} 
+        />
       </div>
       {busy && (
         <div 

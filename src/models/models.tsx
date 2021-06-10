@@ -27,3 +27,26 @@ export class AudioModel{
         this.status = status;
     }
 }
+
+export class PaginationModel{
+    pageNumber: number = null!
+    totalRecords: number = null!
+    firstPage: string = null!
+    totalPages: number = null!
+    lastPage: string = null!
+    nextPage?: string = null!
+
+    constructor(pageNumber: number, totalRecords: number, firstPage: string, 
+        totalPages: number, lastPage: string, nextPage?: string) {
+        this.pageNumber = pageNumber;
+        this.totalRecords = totalRecords;
+        this.firstPage = firstPage;
+        this.totalPages = totalPages;
+        this.lastPage = lastPage;
+        this.nextPage = nextPage;
+    }
+
+    static emptyInstance() {
+        return new PaginationModel(1, 1, '', 1, '', null!);
+    }
+}

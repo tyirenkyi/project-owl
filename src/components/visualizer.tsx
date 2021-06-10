@@ -7,6 +7,7 @@ import "../assets/css/visualizer.css";
 interface VisualizerProps {
   play: boolean,
   id: number,
+  file: string,
   cacheDuration?: any,
   height?: number,
   barGap?: number,
@@ -22,6 +23,7 @@ class Visualizer extends React.Component<VisualizerProps> {
   static propTypes: {
     play: Requireable<boolean>,
     id: Requireable<number>,
+    file: Requireable<string>,
     cacheDuration: Requireable<any>,
     height: Requireable<number>,
     barGap: Requireable<number>,
@@ -107,6 +109,7 @@ class Visualizer extends React.Component<VisualizerProps> {
 Visualizer.propTypes = {
   play: PropTypes.bool,
   id: PropTypes.number,
+  file: PropTypes.string,
   cacheDuration: PropTypes.any,
   height: PropTypes.number,
   barGap: PropTypes.number,

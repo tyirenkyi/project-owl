@@ -77,7 +77,7 @@ const RecordingDetail = () => {
         <div className="player-and-meta">
           <div className="player">
             <div>
-              <Visualizer 
+              {/* <Visualizer 
                 play={playAudio}
                 id={23}
                 height={200}
@@ -85,7 +85,7 @@ const RecordingDetail = () => {
                 cacheDuration={cacheDuration}
                 updateElapsedUI={updateElapsedUI}
                 togglePlayIcon={togglePlayIcon}
-              />
+              /> */}
             </div>
             <div className="controls">
               <button className="play-btn" onClick={handlePlayPress}>

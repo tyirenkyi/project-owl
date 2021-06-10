@@ -67,13 +67,13 @@ const RelatedAudioItem = (props: any) => {
         }  
       >
         <div style={{width: '100%'}}>
-          <Visualizer 
+          {/* <Visualizer 
             play={play} 
             id={props.id}
             cacheDuration={cacheDuration}
             updateElapsedUI={updateElapsedUI}
             togglePlayIcon={togglePlayIcon}
-          />
+          /> */}
         </div>
       </div>
       <button onClick={handlePlayPress}>

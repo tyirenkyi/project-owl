@@ -56,6 +56,7 @@ const RecordingItem = (props: RecordingItemProps) => {
           id={props.data.id} 
           cacheDuration={cacheDuration}
           togglePlayIcon={togglePlayIcon}
+          file={props.data.recording}
         />
       </div>
       <span className="elapsed">{displayDuration}</span>
