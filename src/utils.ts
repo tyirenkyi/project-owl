@@ -11,7 +11,7 @@ const parseAudioJsonList = (json: []): AudioModel[] => {
 
 const parsePaginationJson = (json: any): PaginationModel => {
   return new PaginationModel(json.pageNumber, json.totalRecords, json.firstPage, json.totalPages,
-    json.lastPage, json.nextPage);
+    json.lastPage, json.nextPage, json.previousPage);
 }
 
 export {

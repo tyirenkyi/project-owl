@@ -35,18 +35,20 @@ export class PaginationModel{
     totalPages: number = null!
     lastPage: string = null!
     nextPage?: string = null!
+    previousPage?: string = null!
 
     constructor(pageNumber: number, totalRecords: number, firstPage: string, 
-        totalPages: number, lastPage: string, nextPage?: string) {
+        totalPages: number, lastPage: string, nextPage?: string, previousPage?: string) {
         this.pageNumber = pageNumber;
         this.totalRecords = totalRecords;
         this.firstPage = firstPage;
         this.totalPages = totalPages;
         this.lastPage = lastPage;
         this.nextPage = nextPage;
+        this.previousPage = previousPage
     }
 
     static emptyInstance() {
-        return new PaginationModel(1, 1, '', 1, '', null!);
+        return new PaginationModel(1, 1, '', 1, '', null!, null!);
     }
 }

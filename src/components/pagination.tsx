@@ -16,7 +16,7 @@ const Pagination = (props: PaginationProps) => {
       {props.data.pageNumber > 1 && (
         <button 
           className="prev-page-btn"
-          onClick={() => props.handlePreviousBtnPress(props.data.lastPage!)}
+          onClick={() => props.handlePreviousBtnPress(props.data.previousPage!)}
         >
           <FaChevronLeft /> Previous Page
         </button>
