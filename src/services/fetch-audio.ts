@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
   }
 })
 
-const fetchAudioList = async(pageNumber: number = 1, pageSize: number = 2, issue?: string, status?: string) => {
+const fetchAudioList = async(pageNumber: number = 1, pageSize: number = 24, issue?: string, status?: number) => {
   let requestUrl = `/api/audio?pageNumber=${pageNumber}&pageSize=${pageSize}`;
   if(issue)
     requestUrl += `&issue=${issue}`;

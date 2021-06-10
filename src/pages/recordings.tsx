@@ -11,6 +11,7 @@ import "../assets/css/recordings.css";
 import { useCallback, useEffect, useState } from 'react';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import axios from 'axios';
+import { Status } from '../enums';
 
 
 const Recordings = () => {
@@ -104,6 +105,27 @@ const Recordings = () => {
     }
   }
 
+  const onTabChange = async(newTab: string) => {
+    if(newTab === 'all')
+      loadAudioList();
+    else if(newTab === 'done')
+      fetchAudioListByStatus(Status.Done);
+    else if(newTab === 'submitted')
+      fetchAudioListByStatus(Status.Pending);
+  }
+
+  const fetchAudioListByStatus = async(status: number) => {
+    try {
+      setBusy(true);
+      const response = await fetchAudioList(1, 24, null!, status);
+      parseAudioData(response);
+      setBusy(false);
+      setPaginationData(parsePaginationJson(response))
+    } catch (error) {
+      setBusy(false);
+    }
+  }
+
   useEffect(() => {
     loadAudioList()
   }, [loadAudioList])
@@ -111,7 +133,7 @@ const Recordings = () => {
   return (
     <div className="recordings-container">
       <div className="actions-div">
-        <Tabs />
+        <Tabs onTabChange={onTabChange}/>
         <Pagination 
           data={paginationData!} 
           handleNextBtnPress={handleNextBtnPress} 
