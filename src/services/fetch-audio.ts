@@ -37,5 +37,5 @@ const paginationFetch = async(params: string) => {
 
 export {
   fetchAudioList,
-  paginationFetch
+  paginationFetch,
 }

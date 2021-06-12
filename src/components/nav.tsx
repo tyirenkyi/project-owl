@@ -5,8 +5,13 @@ import { Alert } from "reactstrap";
 import "../assets/css/nav.css";
 import uploadIcon from "../assets/images/upload.svg";
 import Upload from "./upload";
+import { Issue } from "../enums";
 
-const Nav = () => {
+interface NavProps {
+  onIssueClick: Function
+}
+
+const Nav = (props: NavProps) => {
   const [showUploadModal, setShowUploadModal] = useState<boolean>(false);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -81,9 +86,13 @@ const Nav = () => {
               onBlur={() => setShowDropdown(false)}
               ref={dropdown}
             >
-              <button>Internet Connectivity</button>
-              <button>Data</button>
-              <button>Airtime</button>
+              <button onClick={() => props.onIssueClick(Issue.BalanceTransfer)}>{Issue.BalanceTransfer}</button>
+              <button onClick={() => props.onIssueClick(Issue.General)}>{Issue.General}</button>
+              <button onClick={() => props.onIssueClick(Issue.LocalPayments)}>{Issue.LocalPayments}</button>
+              <button onClick={() => props.onIssueClick(Issue.Maintenance)}>{Issue.Maintenance}</button>
+              <button onClick={() => props.onIssueClick(Issue.MissingCard)}>{Issue.MissingCard}</button>
+              <button onClick={() => props.onIssueClick(Issue.Remittance)}>{Issue.Remittance}</button>
+              <button onClick={() => props.onIssueClick(Issue.Uncategorized)}>{Issue.Uncategorized}</button>
             </div>
           )}
         </div>

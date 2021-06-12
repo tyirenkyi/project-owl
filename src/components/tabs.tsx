@@ -3,7 +3,8 @@ import { useState } from "react";
 import "../assets/css/tabs.css";
 
 interface TabsProps{
-  onTabChange: Function
+  onTabChange: Function,
+  currentIssue: string
 }
 
 const Tabs = (props: TabsProps) => {
@@ -34,6 +35,7 @@ const Tabs = (props: TabsProps) => {
       >
         Done
       </button>
+      <h4>{props.currentIssue}</h4>
     </div>
   )
 }

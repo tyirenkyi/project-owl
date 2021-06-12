@@ -1,9 +1,12 @@
 @font-face {
   font-family: Nunito;
-  src: url('../fonts/Nunito-Regular.ttf');
+  src: url('../fonts/Nunito-Regular.ttf') format('truetype'), 
+  url('');
 }
 
 @font-face {
   font-family: Orbitron;
-  src: url('../fonts/Orbitron-VariableFont_wght.ttf');
+  src: url('../fonts/Orbitron-VariableFont_wght.ttf') format('truetype'), 
+  url('../fonts/Orbitron-Regular.woff') format('woff');
+  
 }

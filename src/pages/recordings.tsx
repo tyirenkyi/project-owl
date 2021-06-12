@@ -8,6 +8,7 @@ import emptyList from "../assets/images/empty-mailbox.png";
 import { NotifyModel, AudioModel, PaginationModel } from '../models/models';
 import { fetchAudioList, paginationFetch } from "../services/fetch-audio";
 import { parseAudioJsonList, parsePaginationJson } from "../utils";
+import Nav from "../components/nav";
 
 import "../assets/css/recordings.css";
 import { useCallback, useEffect, useState } from 'react';
@@ -19,6 +20,7 @@ const Recordings = () => {
   const [audioList, setAudioList] = useState<AudioModel[]>([]);
   const [busy, setBusy] = useState<boolean>(false);
   const [paginationData, setPaginationData] = useState<PaginationModel>(PaginationModel.emptyInstance());
+  const [currentIssue, setCurrentIssue] = useState<string>('');
 
   function getAxiosConfig() {
     const config = {
@@ -127,43 +129,58 @@ const Recordings = () => {
     }
   }
 
+  const fetchAudioListByIssue = async(issue: string) => {
+    try {
+      setBusy(true);
+      const response = await fetchAudioList(1, 24, issue, null!);
+      parseAudioData(response);
+      setCurrentIssue(issue);
+      setBusy(false);
+    } catch (error) {
+      setBusy(false);
+    }
+  }
+
   useEffect(() => {
     loadAudioList()
   }, [loadAudioList])
 
   return (
-    <div className="recordings-container">
-      <div className="actions-div">
-        <Tabs onTabChange={onTabChange}/>
-        <Pagination 
-          data={paginationData!} 
-          handleNextBtnPress={handleNextBtnPress} 
-          handlePreviousBtnPress={handlePreviousBtnPress} 
-        />
-      </div>
-      {busy && (
-        <div 
-          style={{height: 'calc(100vh - 400px)', display: 'flex', 
-          alignItems: 'center', justifyContent: 'center'}}
-        >
-          <Ripple color="#000"/>
+    <>
+      <Nav onIssueClick={fetchAudioListByIssue}/>
+      <div className="recordings-container">
+        <div className="actions-div">
+          <Tabs onTabChange={onTabChange} currentIssue={currentIssue} />
+          <Pagination 
+            data={paginationData!} 
+            handleNextBtnPress={handleNextBtnPress} 
+            handlePreviousBtnPress={handlePreviousBtnPress} 
+          />
         </div>
-      )}
-      {!busy && audioList.length > 0 && (
-        <div className="recordings-list">
-          {audioList.map((item) => (
-            <RecordingItem  data={item}/>
-          ))}
-        </div>
-      )}
+        {busy && (
+          <div 
+            style={{height: 'calc(100vh - 400px)', display: 'flex', 
+            alignItems: 'center', justifyContent: 'center'}}
+          >
+            <Ripple color="#000"/>
+          </div>
+        )}
+        {!busy && audioList.length > 0 && (
+          <div className="recordings-list">
+            {audioList.map((item) => (
+              <RecordingItem  data={item}/>
+            ))}
+          </div>
+        )}
 
-      {!busy && audioList.length === 0 && (
-        <div className="empty-recordings-div">
-          <img src={emptyList} alt='empty mailbox' />
-          <p>No recordings found</p>
-        </div>
-      )}
-    </div>
+        {!busy && audioList.length === 0 && (
+          <div className="empty-recordings-div">
+            <img src={emptyList} alt='empty mailbox' />
+            <p>No recordings found</p>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 

@@ -3,7 +3,7 @@ import { AudioModel, PaginationModel } from "./models/models";
 const parseAudioJsonList = (json: []): AudioModel[] => {
   const audioList: AudioModel[] = [];
   json.forEach((element: any, index: number) => {
-    audioList.push(new AudioModel(index, element.fileName, element.issue, element.priority, element.recording,
+    audioList.push(new AudioModel(index, element.fileName, element.issue, element.priority,
       element.transcript, element.created, element.taxonomy, element.status))
   });
   return audioList;
