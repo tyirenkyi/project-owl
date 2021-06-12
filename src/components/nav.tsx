@@ -1,6 +1,7 @@
 import { useState, createRef, useEffect, useCallback } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { Alert } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import "../assets/css/nav.css";
 import uploadIcon from "../assets/images/upload.svg";
@@ -67,7 +68,9 @@ const Nav = (props: NavProps) => {
       </Alert>
       <div className="nav-container">
         
-        <h2>Project OWL</h2>
+        <Link to='/'>
+          <h2>Project OWL</h2>
+        </Link>
         <div className="nav-btns">
           <button className="clear-nav-btn">
             About
