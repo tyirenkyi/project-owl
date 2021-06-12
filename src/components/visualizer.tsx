@@ -110,7 +110,12 @@ class Visualizer extends React.Component<VisualizerProps> {
     return(
       <div className="visualizer">
         <div className="wave" id={`waveform${this.props.id}`} />
-        <audio id={`track${this.props.id}`} ref={this.audioTrack} src={`${REACT_APP_SERVER}/api/audio/play/${this.props.file}`} />
+        <audio 
+          id={`track${this.props.id}`} 
+          ref={this.audioTrack} 
+          src={url}
+          //src={`${REACT_APP_SERVER}/api/audio/play/${this.props.file}`} 
+        />
       </div>
     )
   }

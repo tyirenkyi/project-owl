@@ -4,8 +4,14 @@ import { BsPauseFill } from "react-icons/bs";
 
 import "../assets/css/related-audio.css";
 import Visualizer from './visualizer';
+import { AudioModel } from '../models/models';
 
-const RelatedAudioItem = (props: any) => {
+interface RelatedAudioItemProps {
+  data: AudioModel,
+  id: number
+}
+
+const RelatedAudioItem = (props: RelatedAudioItemProps) => {
   const [play, setPlay] = useState(false);
   const [duration, setDuration] = useState<number>(0);
   const [displayDuration, setDisplayDuration] = useState<string>('');
@@ -35,7 +41,7 @@ const RelatedAudioItem = (props: any) => {
       const minutes = Math.trunc(duration! / 60);
       setDisplayDuration(`${minutes}:${seconds}`)
     } else
-      setDisplayDuration(`00:${Math.trunc(duration!)}`);
+      setDisplayDuration(`00:0${Math.trunc(duration!)}`);
   }, [duration])
 
   useEffect(() => {
@@ -50,7 +56,7 @@ const RelatedAudioItem = (props: any) => {
     } else if(elapsed < 10)
       setDisplayElapsed(`00:0${Math.trunc(elapsed)}`);
     else
-    setDisplayElapsed(`00:${Math.trunc(elapsed)}`);
+    setDisplayElapsed(`00:0${Math.trunc(elapsed)}`);
   }, [elapsed])
 
   useEffect(() => {
@@ -67,13 +73,14 @@ const RelatedAudioItem = (props: any) => {
         }  
       >
         <div style={{width: '100%'}}>
-          {/* <Visualizer 
+          <Visualizer 
             play={play} 
             id={props.id}
             cacheDuration={cacheDuration}
             updateElapsedUI={updateElapsedUI}
             togglePlayIcon={togglePlayIcon}
-          /> */}
+            file={props.data.fileName}
+          />
         </div>
       </div>
       <button onClick={handlePlayPress}>
@@ -86,7 +93,7 @@ const RelatedAudioItem = (props: any) => {
       </span>
       <div className="related-audio-meta">
         <p className="related-audio-label">Issue Type</p>
-        <p className="related-audio-col-value">Internet Connectivity</p>
+        <p className="related-audio-col-value">{props.data.issue}</p>
         <p className="related-audio-label" style={{marginBottom: '0px'}}>Priority</p>
         <p 
           className={`
@@ -96,7 +103,7 @@ const RelatedAudioItem = (props: any) => {
             ${props.data.priority === 'Medium' && 'medium-priority-label'}`
           }
         >{props.data.priority}</p>
-        <p className="label">Yesterday 10:45</p>
+        <p className="label">{props.data.created}</p>
       </div>
     </div>
   )

@@ -18,7 +18,7 @@ const ContextAwareToggle = (props: any) => {
   return (
     <button onClick={decoratedOnClick} className={`toggle-btn ${props.className}`}>
       <div className="row space-btwn">
-        <p className="toggle-title">{props.title}</p>
+        <p className="toggle-title">{isCurrentEventKey ? 'Hide Transcription' : 'Show Transcription'}</p>
         {isCurrentEventKey ? <FaChevronUp color="#8B8B8B"/> : <FaChevronDown color="#8B8B8B"/>}
       </div>
     </button>

@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Recordings} />
-          <Route exact path="/recording" component={RecordingDetail}/>
+          <Route exact path="/recording/:fileName" component={RecordingDetail}/>
         </Switch>
       </Router>
       <Footer />

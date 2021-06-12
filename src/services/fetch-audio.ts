@@ -35,7 +35,17 @@ const paginationFetch = async(params: string) => {
   }
 }
 
+const fetchAudio = async(fileName: string) => {
+  try {
+    const { data } = await axiosInstance.get(`/api/audio/${fileName}`)
+    return data
+  } catch (error) {
+    throw error;
+  }
+}
+
 export {
   fetchAudioList,
   paginationFetch,
+  fetchAudio
 }

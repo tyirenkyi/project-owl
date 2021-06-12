@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useHistory } from "react-router";
 import { BsPauseFill } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 
@@ -15,6 +16,7 @@ const RecordingItem = (props: RecordingItemProps) => {
   const [duration, setDuration] = useState<number>(0);
   const [displayDuration, setDisplayDuration] = useState<string>('');
   const [playBtn, setPlayBtn] = useState<string>('play');
+  const history = useHistory();
 
   const handlePlayPress = () => {
     setPlayAudio(!playAudio)
@@ -42,8 +44,13 @@ const RecordingItem = (props: RecordingItemProps) => {
     sanitizeDuration();
   }, [duration, sanitizeDuration])
 
+
+  const handleItemClick = () => {
+    history.push(`/recording/${props.data.fileName}`)
+  }
+
   return (
-    <div className="recording-container">
+    <div className="recording-container" onClick={handleItemClick}>
       <div 
         className={`audio-visual 
           ${props.data.priority === 'High' && 'high-priority'}
