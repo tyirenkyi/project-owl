@@ -68,12 +68,7 @@ class Visualizer extends React.Component<VisualizerProps> {
       backend: 'WebAudio', height: this.props.height ? this.props.height : 130, 
       progressColor: '#D44646', responsive: true, waveColor: '#000000', 
       cursorColor: 'transparent', barGap: this.props.barGap ? this.props.barGap : 2.5,
-      xhr: {
-        cache: "default",
-        mode: "no-cors",
-        method: "GET",
-        credentials: "include"        
-      }})
+      })
 
     this.waveform.load(this.audioTrack.current);
   }
@@ -106,15 +101,13 @@ class Visualizer extends React.Component<VisualizerProps> {
   }
 
   render() {
-    const url = 'https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3';
     return(
       <div className="visualizer">
         <div className="wave" id={`waveform${this.props.id}`} />
         <audio 
           id={`track${this.props.id}`} 
           ref={this.audioTrack} 
-          src={url}
-          //src={`${REACT_APP_SERVER}/api/audio/play/${this.props.file}`} 
+          src={`${REACT_APP_SERVER}/api/audio/play/${this.props.file}`} 
         />
       </div>
     )
