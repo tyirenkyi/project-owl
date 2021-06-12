@@ -95,3 +95,7 @@
 .no-scroll {
   overflow: hidden;
 }
+
+.nav-container a:hover {
+  text-decoration: none;
+}

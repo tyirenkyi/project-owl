@@ -9,6 +9,7 @@ import { NotifyModel, AudioModel, PaginationModel } from '../models/models';
 import { fetchAudioList, paginationFetch } from "../services/fetch-audio";
 import { parseAudioJsonList, parsePaginationJson } from "../utils";
 import Nav from "../components/nav";
+import Footer from "../components/footer";
 
 import "../assets/css/recordings.css";
 import { useCallback, useEffect, useState } from 'react';
@@ -180,6 +181,7 @@ const Recordings = () => {
           </div>
         )}
       </div>
+      <Footer />
     </>
   )
 }

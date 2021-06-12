@@ -14,10 +14,7 @@ import { fetchAudio, fetchAudioList } from "../services/fetch-audio";
 import { parseAudioJson, parseAudioJsonList } from "../utils";
 import { AudioModel } from '../models/models';
 import Nav from "../components/nav";
-
-const mock = [
-  { priority: 'High' }, { priority: 'Medium' }, { priority: 'Low' }, { priority: 'High' },
-]
+import Footer from "../components/footer";
 
 const RecordingDetail = () => {
   const [playAudio, setPlayAudio] = useState(false);
@@ -223,6 +220,7 @@ const RecordingDetail = () => {
           </div>
         )}
       </div>
+      <Footer />
     </>
   )
 }

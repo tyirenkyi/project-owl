@@ -30,3 +30,7 @@
   font-size: 16px;
   color: white;
 }
+
+.footer-container a:hover {
+  text-decoration: none;
+}

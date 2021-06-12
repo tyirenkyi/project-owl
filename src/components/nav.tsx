@@ -67,7 +67,6 @@ const Nav = (props: NavProps) => {
         {alertMessage}
       </Alert>
       <div className="nav-container">
-        
         <Link to='/'>
           <h2>Project OWL</h2>
         </Link>
