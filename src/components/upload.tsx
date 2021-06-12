@@ -36,7 +36,8 @@ const Upload = (props: any) => {
   }
 
   const validateFile = (file: File):boolean => {
-    if(file.type !== 'audio/wav') {
+    console.log(file.type);
+    if(file.type !== 'audio/wav' && file.type !== 'audio/x-wav') {
       props.toggleAlert('File type not permitted. Wav files only');
       return false
     }
