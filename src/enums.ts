@@ -8,6 +8,12 @@ enum Issue {
   Uncategorized = 'Uncategorized'
 }
 
+enum Status {
+  Pending = 1,
+  Done
+}
+
 export {
-  Issue
+  Issue,
+  Status
 }

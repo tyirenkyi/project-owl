@@ -1,26 +1,40 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import "../assets/css/pagination.css"
+import { PaginationModel } from "../models/models";
 
-const Pagination = () => {
+interface PaginationProps{
+  data: PaginationModel,
+  handlePreviousBtnPress: Function,
+  handleNextBtnPress: Function
+}
+
+const Pagination = (props: PaginationProps) => {
+
   return (
     <div className="pagination-container">
-      <button 
-        className="prev-page-btn"
-      >
-        <FaChevronLeft /> Previous Page
-      </button>
+      {props.data.pageNumber > 1 && (
+        <button 
+          className="prev-page-btn"
+          onClick={() => props.handlePreviousBtnPress(props.data.previousPage!)}
+        >
+          <FaChevronLeft /> Previous Page
+        </button>
+      )}
       <button
         className='active-page-btn'
       >
-        1
+        {props.data.pageNumber}
       </button>
-      <p className="page-count">of 8</p>
-      <button
-        className="next-page-btn"
-      >
-        Next Page<FaChevronRight />
-      </button>
+      <p className="page-count">of {props.data.totalPages}</p>
+      {props.data.nextPage && (
+        <button
+          className="next-page-btn"
+          onClick={() => props.handleNextBtnPress(props.data.nextPage!)}
+        >
+          Next Page<FaChevronRight />
+        </button>
+      )}
     </div>
   )
 }

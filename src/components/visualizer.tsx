@@ -4,9 +4,12 @@ import WaveSurfer from 'wavesurfer.js';
 
 import "../assets/css/visualizer.css";
 
+const { REACT_APP_SERVER } = process.env;
+
 interface VisualizerProps {
   play: boolean,
   id: number,
+  file: string,
   cacheDuration?: any,
   height?: number,
   barGap?: number,
@@ -22,6 +25,7 @@ class Visualizer extends React.Component<VisualizerProps> {
   static propTypes: {
     play: Requireable<boolean>,
     id: Requireable<number>,
+    file: Requireable<string>,
     cacheDuration: Requireable<any>,
     height: Requireable<number>,
     barGap: Requireable<number>,
@@ -32,6 +36,9 @@ class Visualizer extends React.Component<VisualizerProps> {
   constructor(props: any) {
     super(props);
     this.audioTrack = React.createRef<HTMLAudioElement>();
+    this.state = {
+
+    }
   }
 
   componentDidMount() {
@@ -51,6 +58,10 @@ class Visualizer extends React.Component<VisualizerProps> {
     }
   }
 
+  componentWillUnmount() {
+    this.cleanUpSubscriptions();
+  }
+
   handlePlayPause() {
     this.waveform.playPause();
   }
@@ -60,7 +71,8 @@ class Visualizer extends React.Component<VisualizerProps> {
       barWidth: 1, cursorWidth: 1, container: `#waveform${this.props.id}`,
       backend: 'WebAudio', height: this.props.height ? this.props.height : 130, 
       progressColor: '#D44646', responsive: true, waveColor: '#000000', 
-      cursorColor: 'transparent', barGap: this.props.barGap ? this.props.barGap : 2.5})
+      cursorColor: 'transparent', barGap: this.props.barGap ? this.props.barGap : 2.5,
+      })
 
     this.waveform.load(this.audioTrack.current);
   }
@@ -92,13 +104,23 @@ class Visualizer extends React.Component<VisualizerProps> {
     )
   }
 
-  render() {
-    const url = 'https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3';
+  cleanUpSubscriptions() {
+    this.waveform.un('ready', ()=>{})
+    this.waveform.un('audioprocess', ()=>{})
+    this.waveform.un('play', ()=>{})
+    this.waveform.un('finish', () => {})
+    this.waveform.un('pause', () => {})
+  }
 
+  render() {
     return(
       <div className="visualizer">
         <div className="wave" id={`waveform${this.props.id}`} />
-        <audio id={`track${this.props.id}`} ref={this.audioTrack} src={url} />
+        <audio 
+          id={`track${this.props.id}`} 
+          ref={this.audioTrack} 
+          src={`${REACT_APP_SERVER}/api/audio/play/${this.props.file}`} 
+        />
       </div>
     )
   }
@@ -107,6 +129,7 @@ class Visualizer extends React.Component<VisualizerProps> {
 Visualizer.propTypes = {
   play: PropTypes.bool,
   id: PropTypes.number,
+  file: PropTypes.string,
   cacheDuration: PropTypes.any,
   height: PropTypes.number,
   barGap: PropTypes.number,

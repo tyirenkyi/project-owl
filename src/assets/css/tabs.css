@@ -20,3 +20,8 @@
   background-color: #949494;
   color: white;
 }
+
+.tabs-container h4 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+}

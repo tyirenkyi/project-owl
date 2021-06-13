@@ -1,13 +1,21 @@
+import { Link } from "react-router-dom";
+
 import "../assets/css/footer.css";
 
 const Footer = () => {
   return (
     <div className="footer-container">
-      <h2>Project OWL</h2>
+      <Link to='/'>
+        <h2>Project OWL</h2>
+      </Link>
       <div className="footer-links">
-        <p>Home</p>
+        <Link to='/'>
+          <p>Home</p>
+        </Link>
         <p>About</p>
-        <p>GitHub</p>
+        <a href='https://github.com/tyirenkyi/project-owl' target="_blank" rel="noreferrer">
+          <p>GitHub</p>
+        </a>
       </div>
     </div>
   )

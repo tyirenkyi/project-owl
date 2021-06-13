@@ -1,6 +1,6 @@
 .recordings-container {
   background-color: #F9F9F9;
-  min-height: calc(100vh - 249px);
+  min-height: calc(100vh - 150px);
   padding-left: 6%;
   padding-right: 6%;
   padding-top: 3%;
@@ -22,4 +22,24 @@
   column-count: 3;
   column-gap: 20px;
   row-gap: 20px;
+}
+
+.empty-recordings-div {
+  width: 100%;
+  height: calc(100vh - 400px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.empty-recordings-div img {
+  width: 100px;
+  height: 200px;
+}
+
+.empty-recordings-div p {
+  margin: 0;
+  margin-top: 10px;
+  font-family: Orbitron;
 }

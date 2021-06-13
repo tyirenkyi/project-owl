@@ -1,15 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
+import { useHistory } from "react-router";
 import { BsPauseFill } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 
 import "../assets/css/recording-item.css";
 import Visualizer from "../components/visualizer";
+import { AudioModel } from "../models/models";
 
-const RecordingItem = (props: any) => {
+interface RecordingItemProps {
+  data: AudioModel
+}
+
+const RecordingItem = (props: RecordingItemProps) => {
   const [playAudio, setPlayAudio] = useState(false);
   const [duration, setDuration] = useState<number>(0);
-  const [displayDuration, setDisplayDuration] = useState<string>('');
+  const [displayDuration, setDisplayDuration] = useState<string>('00:00');
   const [playBtn, setPlayBtn] = useState<string>('play');
+  const history = useHistory();
 
   const handlePlayPress = () => {
     setPlayAudio(!playAudio)
@@ -24,8 +31,10 @@ const RecordingItem = (props: any) => {
   }
 
   const sanitizeDuration = useCallback(() => {
+    if(duration === 0)
+      return;
     if(duration! > 60) {
-      const seconds = duration! % 60;
+      const seconds = Math.round(duration! % 60);
       const minutes = Math.trunc(duration! / 60);
       setDisplayDuration(`${minutes}:${seconds}`)
     } else {
@@ -37,8 +46,13 @@ const RecordingItem = (props: any) => {
     sanitizeDuration();
   }, [duration, sanitizeDuration])
 
+
+  const handleItemClick = () => {
+    history.push(`/recording/${props.data.fileName}`)
+  }
+
   return (
-    <div className="recording-container">
+    <div className="recording-container" onClick={handleItemClick}>
       <div 
         className={`audio-visual 
           ${props.data.priority === 'High' && 'high-priority'}
@@ -48,16 +62,17 @@ const RecordingItem = (props: any) => {
       >
         <Visualizer 
           play={playAudio} 
-          id={props.id} 
+          id={props.data.id} 
           cacheDuration={cacheDuration}
           togglePlayIcon={togglePlayIcon}
+          file={props.data.fileName}
         />
       </div>
       <span className="elapsed">{displayDuration}</span>
       <div className="metadata-div">
         <div className="metadata-column">
-          <p>Issue Type</p>
-          <h5>Internet Connectivity</h5>
+          <p></p>
+          <h5>{props.data.issue}</h5>
         </div>
         <div  className="metadata-column">
           <p>Priority</p>
@@ -70,7 +85,7 @@ const RecordingItem = (props: any) => {
           >
               {props.data.priority}</h5>
         </div>
-        <span className="timestamp">11:23</span>
+        <span className="timestamp">{props.data.created}</span>
       </div>
       <button 
         className="playback-btn" 
