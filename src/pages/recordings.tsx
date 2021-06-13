@@ -15,6 +15,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import axios from 'axios';
 
+const { REACT_APP_SERVER } = process.env;
 
 const Recordings = () => {
   const [audioList, setAudioList] = useState<AudioModel[]>([]);
@@ -30,7 +31,7 @@ const Recordings = () => {
   }
 
   const getConnectionInfo = useCallback(async() => {
-    return axios.post(`https://projectowl.azurewebsites.net/api/negotiate`, null, getAxiosConfig())
+    return axios.post(`${REACT_APP_SERVER}/api/negotiate`, null, getAxiosConfig())
       .then(resp => resp.data);
   }, [])
 
