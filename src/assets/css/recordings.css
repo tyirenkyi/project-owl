@@ -47,3 +47,10 @@
   margin-top: 10px;
   font-family: Orbitron;
 }
+
+@media only screen and (max-width: 500px) {
+  .recordings-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

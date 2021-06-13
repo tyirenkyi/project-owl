@@ -32,6 +32,7 @@ const Nav = (props: NavProps) => {
       disableScroll()
     
     setShowUploadModal((prevValue) => !prevValue);
+    setShowMobileMenu(false);
   }
 
   const enableScroll = () => {
