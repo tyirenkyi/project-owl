@@ -67,6 +67,25 @@ const Upload = (props: any) => {
     }
   }
 
+  const dragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  }
+
+  const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  }
+
+  const dragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  }
+
+  const fileDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const files: FileList = e.dataTransfer.files;
+    if(files.length)
+      handleFile(files[0]);
+  }
+  
 
   return (
     <div className="upload-container">
@@ -75,7 +94,14 @@ const Upload = (props: any) => {
           <RiCloseLine color="white" size={30}/>
         </button>
         {status !== 'success' && (
-          <div className="dropzone" style={status === 'selected' ? {background: '#E1FFE4', borderColor: '#56A75E'} : {}}>
+          <div 
+            className="dropzone" 
+            style={status === 'selected' ? {background: '#E1FFE4', borderColor: '#56A75E'} : {}}
+            onDragOver={dragOver}
+            onDragEnter={dragEnter}
+            onDragLeave={dragLeave}
+            onDrop={fileDrop}
+          >
             <img src={visualizer} alt="visualizer" />
             {status === 'empty' && (
               <span>
