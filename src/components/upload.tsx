@@ -63,7 +63,6 @@ const Upload = (props: any) => {
       setStatus('success');
     } catch (error) {
       setBusy(false);
-      clearFile();
       props.toggleAlert('Failed to upload your file. Please try again later')
     }
   }

@@ -156,7 +156,7 @@ const Recordings = () => {
       <Nav onIssueClick={fetchAudioListByIssue}/>
       <div className="recordings-container">
         <div className="actions-div">
-          <Tabs onTabChange={onTabChange} currentIssue={currentIssue} />
+          <Tabs currentIssue={currentIssue} />
           <Pagination 
             data={paginationData!} 
             handleNextBtnPress={handleNextBtnPress} 
