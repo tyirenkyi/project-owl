@@ -200,7 +200,7 @@ const RecordingDetail = () => {
                 <div className='taxonomy custom-col'>
                   <p className="label">Taxonomy</p>
                   <div className="taxonomy-items">
-                    {recording?.taxonomy.map((item, index) => (
+                    {recording?.taxonomy && recording?.taxonomy.map((item, index) => (
                       <span className="taxonomy-item" key={index}>{item}</span>
                     ))}
                   </div>
