@@ -4,6 +4,7 @@
   align-items: center;
   margin-bottom: 20px;
   position: relative;
+  cursor: pointer;
 }
 
 .related-audio-player {

@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { FaChevronLeft, FaPlay } from "react-icons/fa";
-import { RiEditLine } from "react-icons/ri";
 import { BsPauseFill } from "react-icons/bs";
 import Accordion from "react-bootstrap/Accordion";
+import { useHistory } from 'react-router-dom';
 
 import "../assets/css/recording-detail.css";
 import RelatedAudioItem from "../components/related-audio-item";
@@ -27,6 +27,7 @@ const RecordingDetail = () => {
   const [recording, setRecording] = useState<AudioModel>();
   const [relatedAudioList, setRelatedAudioList] = useState<AudioModel[]>([]);
   const { fileName }: any = useParams();
+  const history = useHistory();
 
   const handlePlayPress = () => {
     setPlayAudio(!playAudio)
@@ -105,11 +106,15 @@ const RecordingDetail = () => {
 
   useEffect(() => {
     loadRecording()
-  }, [loadRecording])
+  }, [loadRecording, fileName])
 
   useEffect(() => {
     loadRelatedAudioList();
   }, [recording, loadRelatedAudioList])
+
+  const handleRelatedItemClick = (fileName: string) => {
+    history.push(`/recording/${fileName}`);
+  }
 
   return(
     <>
@@ -212,7 +217,7 @@ const RecordingDetail = () => {
               ):(
                 <div className="related-media-lis">
                   {relatedAudioList.map((item, index) => (
-                    <RelatedAudioItem data={item} key={index} id={index}/>
+                    <RelatedAudioItem data={item} key={index} id={index} handleItemClick={handleRelatedItemClick}/>
                   ))}
                 </div>
               )}
