@@ -44,9 +44,6 @@ const Upload = (props: any) => {
     return true;
   }
 
-  const clearFile = () => {
-    setFile(null);
-  }
 
   const generateUploadForm = () => {
     const form = new FormData();
