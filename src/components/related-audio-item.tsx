@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FaPlay } from "react-icons/fa";
 import { BsPauseFill } from "react-icons/bs";
+import { useHistory } from "react-router";
+
 
 import "../assets/css/related-audio.css";
 import Visualizer from './visualizer';
@@ -18,6 +20,7 @@ const RelatedAudioItem = (props: RelatedAudioItemProps) => {
   const [elapsed, setElapsed] = useState<number>(0);
   const [displayElapsed, setDisplayElapsed] = useState<string>('');
   const [playBtn, setPlayBtn] = useState<string>('play');
+  const history = useHistory();
 
   const handlePlayPress = () => {
     setPlay(!play)
@@ -65,8 +68,12 @@ const RelatedAudioItem = (props: RelatedAudioItemProps) => {
     sanitizeElapsed();
   }, [elapsed, sanitizeElapsed])
 
+  const handleItemClick = () => {
+    history.push(`/recording/${props.data.fileName}`)
+  }
+
   return(
-    <div className="related-audio-item">
+    <div className="related-audio-item" onClick={handleItemClick}>
       <div 
         className={`related-audio-player 
           ${props.data.priority === 'High' && 'high-priority'}
