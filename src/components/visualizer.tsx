@@ -58,6 +58,10 @@ class Visualizer extends React.Component<VisualizerProps> {
     }
   }
 
+  componentWillUnmount() {
+    this.cleanUpSubscriptions();
+  }
+
   handlePlayPause() {
     this.waveform.playPause();
   }
@@ -98,6 +102,14 @@ class Visualizer extends React.Component<VisualizerProps> {
     this.waveform.on(
       'finish', () => this.props.togglePlayIcon('play')
     )
+  }
+
+  cleanUpSubscriptions() {
+    this.waveform.un('ready', ()=>{})
+    this.waveform.un('audioprocess', ()=>{})
+    this.waveform.un('play', ()=>{})
+    this.waveform.un('finish', () => {})
+    this.waveform.un('pause', () => {})
   }
 
   render() {

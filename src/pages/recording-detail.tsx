@@ -19,11 +19,11 @@ import Footer from "../components/footer";
 const RecordingDetail = () => {
   const [playAudio, setPlayAudio] = useState(false);
   const [duration, setDuration] = useState<number>(0);
-  const [displayDuration, setDisplayDuration] = useState<string>('');
+  const [displayDuration, setDisplayDuration] = useState<string>('00:00');
   const [elapsed, setElapsed] = useState<number>(0);
-  const [displayElapsed, setDisplayElapsed] = useState<string>('');
+  const [displayElapsed, setDisplayElapsed] = useState<string>('00:00');
   const [playBtn, setPlayBtn] = useState<string>('play');
-  const [busy, setBusy] = useState<boolean>(false);
+  const [busy, setBusy] = useState<boolean>(true);
   const [recording, setRecording] = useState<AudioModel>();
   const [relatedAudioList, setRelatedAudioList] = useState<AudioModel[]>([]);
   const { fileName }: any = useParams();
@@ -51,12 +51,14 @@ const RecordingDetail = () => {
   }
 
   const sanitizeDuration = useCallback(() => {
+    if(duration === 0)
+      return;
     if(duration! > 60) {
-      const seconds = duration! % 60;
+      const seconds = Math.round(duration! % 60);
       const minutes = Math.trunc(duration! / 60);
       setDisplayDuration(`${minutes}:${seconds}`)
     } else
-      setDisplayDuration(`00:0${Math.trunc(duration!)}`);
+      setDisplayDuration(`00:${Math.trunc(duration!)}`);
   }, [duration])
 
   useEffect(() => {
@@ -64,8 +66,10 @@ const RecordingDetail = () => {
   }, [duration, sanitizeDuration])
 
   const sanitizeElapsed = useCallback(() => {
+    if(elapsed === 0)
+      return;
     if(elapsed > 60) {
-      const seconds = elapsed % 60;
+      const seconds = Math.round(elapsed % 60);
       const minutes = Math.trunc(elapsed / 60);
       setDisplayElapsed(`${minutes}:${seconds}`);
     } else if(elapsed < 10)
@@ -75,7 +79,6 @@ const RecordingDetail = () => {
   }, [elapsed])
 
   const loadRecording = useCallback(async() => {
-    setBusy(true);
     try {
       const response = await fetchAudio(fileName);
       setRecording(parseAudioJson(response));

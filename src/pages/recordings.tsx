@@ -41,7 +41,7 @@ const Recordings = () => {
       const recording = parseAudioJson(response);
       console.log(recording)
       setAudioList((prevState) => [...prevState, recording]);
-    } catch (error) {}
+    } catch (error) {console.error(error)}
   }
 
   useEffect(() => {
@@ -173,8 +173,8 @@ const Recordings = () => {
         )}
         {!busy && audioList.length > 0 && (
           <div className="recordings-list">
-            {audioList.map((item) => (
-              <RecordingItem  data={item}/>
+            {audioList.map((item, index) => (
+              <RecordingItem  data={item} key={index}/>
             ))}
           </div>
         )}

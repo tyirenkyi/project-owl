@@ -14,7 +14,7 @@ interface RelatedAudioItemProps {
 const RelatedAudioItem = (props: RelatedAudioItemProps) => {
   const [play, setPlay] = useState(false);
   const [duration, setDuration] = useState<number>(0);
-  const [displayDuration, setDisplayDuration] = useState<string>('');
+  const [displayDuration, setDisplayDuration] = useState<string>('00:00');
   const [elapsed, setElapsed] = useState<number>(0);
   const [displayElapsed, setDisplayElapsed] = useState<string>('');
   const [playBtn, setPlayBtn] = useState<string>('play');
@@ -36,8 +36,10 @@ const RelatedAudioItem = (props: RelatedAudioItemProps) => {
   }
 
   const sanitizeDuration = useCallback(() => {
+    if(duration === 0)
+      return;
     if(duration! > 60) {
-      const seconds = duration! % 60;
+      const seconds = Math.round(duration! % 60);
       const minutes = Math.trunc(duration! / 60);
       setDisplayDuration(`${minutes}:${seconds}`)
     } else
@@ -50,13 +52,13 @@ const RelatedAudioItem = (props: RelatedAudioItemProps) => {
 
   const sanitizeElapsed = useCallback(() => {
     if(elapsed > 60) {
-      const seconds = elapsed % 60;
+      const seconds = Math.round( elapsed % 60);
       const minutes = Math.trunc(elapsed / 60);
       setDisplayElapsed(`${minutes}:${seconds}`);
     } else if(elapsed < 10)
       setDisplayElapsed(`00:0${Math.trunc(elapsed)}`);
     else
-    setDisplayElapsed(`00:0${Math.trunc(elapsed)}`);
+    setDisplayElapsed(`00:${Math.trunc(elapsed)}`);
   }, [elapsed])
 
   useEffect(() => {

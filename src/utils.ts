@@ -15,7 +15,6 @@ const parsePaginationJson = (json: any): PaginationModel => {
 }
 
 const parseAudioJson = (json: any) => {
-  console.log(json)
   return new AudioModel(1, json.fileName, json.issue, json.priority, json.transcript, json.created,
     json.taxonomy, json.status);
 }

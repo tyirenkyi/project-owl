@@ -14,7 +14,7 @@ interface RecordingItemProps {
 const RecordingItem = (props: RecordingItemProps) => {
   const [playAudio, setPlayAudio] = useState(false);
   const [duration, setDuration] = useState<number>(0);
-  const [displayDuration, setDisplayDuration] = useState<string>('');
+  const [displayDuration, setDisplayDuration] = useState<string>('00:00');
   const [playBtn, setPlayBtn] = useState<string>('play');
   const history = useHistory();
 
@@ -31,8 +31,10 @@ const RecordingItem = (props: RecordingItemProps) => {
   }
 
   const sanitizeDuration = useCallback(() => {
+    if(duration === 0)
+      return;
     if(duration! > 60) {
-      const seconds = duration! % 60;
+      const seconds = Math.round(duration! % 60);
       const minutes = Math.trunc(duration! / 60);
       setDisplayDuration(`${minutes}:${seconds}`)
     } else {
