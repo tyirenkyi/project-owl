@@ -8,7 +8,8 @@ import { AudioModel } from '../models/models';
 
 interface RelatedAudioItemProps {
   data: AudioModel,
-  id: number
+  id: number,
+  handleItemClick: any
 }
 
 const RelatedAudioItem = (props: RelatedAudioItemProps) => {
@@ -65,8 +66,10 @@ const RelatedAudioItem = (props: RelatedAudioItemProps) => {
     sanitizeElapsed();
   }, [elapsed, sanitizeElapsed])
 
+  
+
   return(
-    <div className="related-audio-item">
+    <div className="related-audio-item" onDoubleClick={(_) => props.handleItemClick(props.data.fileName)}>
       <div 
         className={`related-audio-player 
           ${props.data.priority === 'High' && 'high-priority'}

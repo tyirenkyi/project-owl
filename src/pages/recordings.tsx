@@ -1,4 +1,3 @@
-import { Status } from '../enums';
 import '../assets/css/recordings.css';
 import Pagination from "../components/pagination";
 import Tabs from "../components/tabs";
@@ -114,28 +113,8 @@ const Recordings = () => {
     }
   }
 
-  const onTabChange = async(newTab: string) => {
-    if(newTab === 'all')
-      loadAudioList();
-    else if(newTab === 'done')
-      fetchAudioListByStatus(Status.Done);
-    else if(newTab === 'submitted')
-      fetchAudioListByStatus(Status.Pending);
-  }
-
-  const fetchAudioListByStatus = async(status: number) => {
-    try {
-      setBusy(true);
-      const response = await fetchAudioList(1, 24, null!, status);
-      parseAudioData(response);
-      setBusy(false);
-      setPaginationData(parsePaginationJson(response))
-    } catch (error) {
-      setBusy(false);
-    }
-  }
-
   const fetchAudioListByIssue = async(issue: string) => {
+    console.log('neone')
     try {
       setBusy(true);
       const response = await fetchAudioList(1, 24, issue, null!);
@@ -156,7 +135,7 @@ const Recordings = () => {
       <Nav onIssueClick={fetchAudioListByIssue}/>
       <div className="recordings-container">
         <div className="actions-div">
-          <Tabs onTabChange={onTabChange} currentIssue={currentIssue} />
+          <Tabs currentIssue={currentIssue} />
           <Pagination 
             data={paginationData!} 
             handleNextBtnPress={handleNextBtnPress} 

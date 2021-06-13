@@ -52,7 +52,7 @@ const RecordingItem = (props: RecordingItemProps) => {
   }
 
   return (
-    <div className="recording-container" onClick={handleItemClick}>
+    <div className="recording-container" onDoubleClick={handleItemClick}>
       <div 
         className={`audio-visual 
           ${props.data.priority === 'High' && 'high-priority'}
@@ -71,7 +71,7 @@ const RecordingItem = (props: RecordingItemProps) => {
       <span className="elapsed">{displayDuration}</span>
       <div className="metadata-div">
         <div className="metadata-column">
-          <p></p>
+          <p>Issue Type</p>
           <h5>{props.data.issue}</h5>
         </div>
         <div  className="metadata-column">

@@ -1,5 +1,7 @@
-import { useState, createRef, useEffect, useCallback } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import React, { useState, createRef, useEffect, useCallback } from "react";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { BiMenu } from "react-icons/bi";
+import { IoIosClose } from "react-icons/io";
 import { Alert } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -17,6 +19,8 @@ const Nav = (props: NavProps) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>('');
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
+  const [showMobileDropdown, setShowMobileDropdown] = useState<boolean>(false);
 
   const dropdown = createRef<HTMLDivElement>();
 
@@ -28,6 +32,7 @@ const Nav = (props: NavProps) => {
       disableScroll()
     
     setShowUploadModal((prevValue) => !prevValue);
+    setShowMobileMenu(false);
   }
 
   const enableScroll = () => {
@@ -61,6 +66,20 @@ const Nav = (props: NavProps) => {
     setShowAlert(!showAlert)
   }
 
+  const onMenuBtnClick = () => {
+    setShowMobileMenu((prevState) => !prevState);
+  }
+
+  const onMobileIssuesBtnPress = () => {
+    setShowMobileDropdown((prevState) => !prevState);
+  }
+
+  const handleBlur = (e: any) => {
+    if(e.currentTarget.contains(e.relatedTarget))
+      return;
+    setShowDropdown(false);
+  }
+
   return (
     <>
       <Alert color="danger" isOpen={showAlert} toggle={()=> setShowAlert(false)}>
@@ -75,7 +94,7 @@ const Nav = (props: NavProps) => {
             About
           </button>
           <button className="clear-nav-btn" onClick={() => setShowDropdown(true)}>
-            Issues <FaChevronDown />
+            Issues {showDropdown ? (<FaChevronUp />):(<FaChevronDown />)}
           </button>
           <button className="upload-btn" onClick={toggleUploadModal}>
             <img src={uploadIcon} alt="upload icon" />
@@ -84,8 +103,8 @@ const Nav = (props: NavProps) => {
           {showDropdown && (
             <div 
               className="issues-div" 
-              tabIndex={1} 
-              onBlur={() => setShowDropdown(false)}
+              tabIndex={10} 
+              onBlur={handleBlur}
               ref={dropdown}
             >
               <button onClick={() => props.onIssueClick(Issue.BalanceTransfer)}>{Issue.BalanceTransfer}</button>
@@ -98,8 +117,40 @@ const Nav = (props: NavProps) => {
             </div>
           )}
         </div>
+        <button className="menu-btn" onClick={onMenuBtnClick}>
+          {showMobileMenu ? (
+            <IoIosClose color={'#000'} size={35} />
+          ):(
+            <BiMenu color={'#000'} size={30} />
+          )}
+        </button>
         {showUploadModal && <Upload closeModal={toggleUploadModal} toggleAlert={toggleAlert}/>}
       </div>
+      {showMobileMenu && (
+        <div className="mobile-menu">
+          <button className="mobile-nav-btn">
+            About
+          </button>
+          <button className="mobile-nav-btn" onClick={onMobileIssuesBtnPress}>
+            Issues {showMobileDropdown ? <FaChevronUp size={15}/> : <FaChevronDown size={15}/>}
+          </button>
+          {showMobileDropdown && (
+            <div className="mobile-issues-div">
+              <button onClick={() => props.onIssueClick(Issue.BalanceTransfer)}>{Issue.BalanceTransfer}</button>
+              <button onClick={() => props.onIssueClick(Issue.General)}>{Issue.General}</button>
+              <button onClick={() => props.onIssueClick(Issue.LocalPayments)}>{Issue.LocalPayments}</button>
+              <button onClick={() => props.onIssueClick(Issue.Maintenance)}>{Issue.Maintenance}</button>
+              <button onClick={() => props.onIssueClick(Issue.MissingCard)}>{Issue.MissingCard}</button>
+              <button onClick={() => props.onIssueClick(Issue.Remittance)}>{Issue.Remittance}</button>
+              <button onClick={() => props.onIssueClick(Issue.Uncategorized)}>{Issue.Uncategorized}</button>
+            </div>
+          )}
+          <button className="mobile-upload-btn" onClick={toggleUploadModal}>
+            <img src={uploadIcon} alt="upload icon" />
+            Upload Recording
+          </button>
+        </div>
+      )}
     </>
   )
 }

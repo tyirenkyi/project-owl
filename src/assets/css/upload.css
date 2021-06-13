@@ -46,7 +46,7 @@
   margin-top: 10px;
 }
 
-.upload-btn {
+.select-file-btn {
   outline: none;
   border: none;
   background-color: transparent;
@@ -173,4 +173,25 @@ select::-ms-expand {
 .custom-alert {
   position: absolute;
   top: 40px;
+}
+
+@media only screen and (max-width: 600px) {
+  .upload-container {
+    padding: 40px;
+  }
+
+  .upload-modal {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .upload-container {
+    padding: 20px 0;
+  }
+
+  .upload-modal {
+    width: 85%;
+    height: 500px;
+  }
 }

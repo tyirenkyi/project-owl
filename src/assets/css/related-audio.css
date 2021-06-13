@@ -4,6 +4,7 @@
   align-items: center;
   margin-bottom: 20px;
   position: relative;
+  cursor: pointer;
 }
 
 .related-audio-player {
@@ -47,7 +48,7 @@
   justify-content: center;
   position: absolute;
   top: 40%;
-  left: 20%;
+  left: 23%;
   z-index: 10;
 }
 

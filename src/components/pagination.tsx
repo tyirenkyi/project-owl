@@ -18,7 +18,7 @@ const Pagination = (props: PaginationProps) => {
           className="prev-page-btn"
           onClick={() => props.handlePreviousBtnPress(props.data.previousPage!)}
         >
-          <FaChevronLeft /> Previous Page
+          <FaChevronLeft /> <p>Previous Page</p>
         </button>
       )}
       <button
@@ -32,7 +32,7 @@ const Pagination = (props: PaginationProps) => {
           className="next-page-btn"
           onClick={() => props.handleNextBtnPress(props.data.nextPage!)}
         >
-          Next Page<FaChevronRight />
+          <p>Next Page</p><FaChevronRight />
         </button>
       )}
     </div>

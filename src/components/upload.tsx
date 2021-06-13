@@ -81,7 +81,7 @@ const Upload = (props: any) => {
               <span>
                 <input hidden ref={fileInput} type="file" onChange={(e) => handleFileSelect(e)}/>
                 <button 
-                  className="upload-btn"
+                  className="select-file-btn"
                   onClick={(e) => openUploadDialog(e)}
                 >
                   Choose File
