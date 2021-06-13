@@ -71,7 +71,7 @@ const RecordingItem = (props: RecordingItemProps) => {
       <span className="elapsed">{displayDuration}</span>
       <div className="metadata-div">
         <div className="metadata-column">
-          <p></p>
+          <p>Issue Type</p>
           <h5>{props.data.issue}</h5>
         </div>
         <div  className="metadata-column">

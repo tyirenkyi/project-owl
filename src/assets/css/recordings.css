@@ -16,12 +16,16 @@
 
 .recordings-list {
   margin-top: 50px;
-  flex-wrap: wrap;
-  display: flex;
-  flex-direction: row;
+  -moz-column-width: 400px;
+ -webkit-column-width: 400px;
+ column-width: 400px;
+  -moz-column-count: 3;
+  -webkit-column-count: 3;
   column-count: 3;
-  column-gap: 20px;
-  row-gap: 20px;
+  -moz-column-gap: 30px;
+  -webkit-column-gap: 30px;
+  column-gap: 30px;
+  row-gap: 30px;
 }
 
 .empty-recordings-div {

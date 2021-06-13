@@ -69,7 +69,7 @@ class Visualizer extends React.Component<VisualizerProps> {
   initializeWaveSurfer() {
     this.waveform = WaveSurfer.create({
       barWidth: 1, cursorWidth: 1, container: `#waveform${this.props.id}`,
-      backend: 'WebAudio', height: this.props.height ? this.props.height : 130, 
+      backend: 'WebAudio', height: this.props.height ? this.props.height : 120, 
       progressColor: '#D44646', responsive: true, waveColor: '#000000', 
       cursorColor: 'transparent', barGap: this.props.barGap ? this.props.barGap : 2.5,
       })

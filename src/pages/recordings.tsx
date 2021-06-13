@@ -1,4 +1,3 @@
-import { Status } from '../enums';
 import '../assets/css/recordings.css';
 import Pagination from "../components/pagination";
 import Tabs from "../components/tabs";
@@ -106,27 +105,6 @@ const Recordings = () => {
     setBusy(true)
     try {
       const response = await paginationFetch(params);
-      parseAudioData(response);
-      setBusy(false);
-      setPaginationData(parsePaginationJson(response))
-    } catch (error) {
-      setBusy(false);
-    }
-  }
-
-  const onTabChange = async(newTab: string) => {
-    if(newTab === 'all')
-      loadAudioList();
-    else if(newTab === 'done')
-      fetchAudioListByStatus(Status.Done);
-    else if(newTab === 'submitted')
-      fetchAudioListByStatus(Status.Pending);
-  }
-
-  const fetchAudioListByStatus = async(status: number) => {
-    try {
-      setBusy(true);
-      const response = await fetchAudioList(1, 24, null!, status);
       parseAudioData(response);
       setBusy(false);
       setPaginationData(parsePaginationJson(response))
