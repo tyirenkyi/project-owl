@@ -50,8 +50,7 @@ To run the application locally, please follow the steps below.
 
 ### Prerequisites
 
-* [Visual Studio 2019](https://visualstudio.microsoft.com/)
-* [Azure Account](https://azure.microsoft.com/)
+* [Visual Studio Code](https://code.visualstudio.com)
 
 ### Setup
 1. Clone the repo
