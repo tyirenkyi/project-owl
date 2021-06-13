@@ -6,8 +6,8 @@ import RecordingItem from "../components/recording-item";
 import Ripple from "../components/ripple";
 import emptyList from "../assets/images/empty-mailbox.png";
 import { NotifyModel, AudioModel, PaginationModel } from '../models/models';
-import { fetchAudioList, paginationFetch } from "../services/fetch-audio";
-import { parseAudioJsonList, parsePaginationJson } from "../utils";
+import { fetchAudio, fetchAudioList, paginationFetch } from "../services/fetch-audio";
+import { parseAudioJson, parseAudioJsonList, parsePaginationJson } from "../utils";
 import Nav from "../components/nav";
 import Footer from "../components/footer";
 
@@ -35,8 +35,13 @@ const Recordings = () => {
       .then(resp => resp.data);
   }, [])
 
-  function updateList(data: NotifyModel){
-    console.log(data)
+  const updateList = async(data: NotifyModel) => {
+    try {
+      const response = await fetchAudio(data.fileName);
+      const recording = parseAudioJson(response);
+      console.log(recording)
+      setAudioList((prevState) => [...prevState, recording]);
+    } catch (error) {}
   }
 
   useEffect(() => {
