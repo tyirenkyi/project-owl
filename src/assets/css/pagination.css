@@ -52,3 +52,25 @@
   font-size: 14px;
   margin-left: 12px;
 }
+
+.next-page-btn p {
+  color: #8B8B8B;
+  font-size: 14px;
+  margin: 0;
+}
+
+.prev-page-btn p {
+  color: #8B8B8B;
+  font-size: 14px;
+  margin: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .next-page-btn p {
+    display: none;
+  }
+
+  .prev-page-btn p {
+    display: none;
+  }
+}
