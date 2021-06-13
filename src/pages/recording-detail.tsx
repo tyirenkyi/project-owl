@@ -167,9 +167,6 @@ const RecordingDetail = () => {
                       <p className="label">Issue Type</p>
                       <span className="custom-row align-items-center">
                         <p className="col-value">{recording?.issue}</p>
-                        <button className='edit-btn'>
-                          <RiEditLine color={"#AAAAAA"} size={20}/>
-                        </button>
                       </span>
                     </div>
                     <div className="custom-col">

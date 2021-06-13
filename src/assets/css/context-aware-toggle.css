@@ -13,5 +13,6 @@
   margin-left: 15px;
 }
 
-.context-toggle {
+.toggle-btn svg {
+  margin-top: 5px;
 }
