@@ -52,7 +52,7 @@ const RecordingItem = (props: RecordingItemProps) => {
   }
 
   return (
-    <div className="recording-container" onDoubleClick={handleItemClick}>
+    <div className="recording-container">
       <div 
         className={`audio-visual 
           ${props.data.priority === 'High' && 'high-priority'}
@@ -85,6 +85,12 @@ const RecordingItem = (props: RecordingItemProps) => {
           >
               {props.data.priority}</h5>
         </div>
+        <button 
+          className="view-details-btn"
+          onClick={handleItemClick}
+        >
+          View details
+        </button>
         <span className="timestamp">{props.data.created}</span>
       </div>
       <button 
