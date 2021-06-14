@@ -11,9 +11,9 @@ import { uploadAudio } from "../services/upload";
 import Ripple from "../components/ripple";
 
 const Upload = (props: any) => {
-  const [status, setStatus] = useState<string>(Issue.LocalPayments);
+  const [status, setStatus] = useState<string>('empty');
   const [file, setFile] = useState<any>(null);
-  const [issue, setIssue] = useState<string>('');
+  const [issue, setIssue] = useState<string>(Issue.LocalPayments);
   const [busy, setBusy] = useState<boolean>(false);
   const fileInput = createRef<HTMLInputElement>();
 
