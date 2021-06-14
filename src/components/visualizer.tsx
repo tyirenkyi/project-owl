@@ -36,9 +36,10 @@ class Visualizer extends React.Component<VisualizerProps> {
   constructor(props: any) {
     super(props);
     this.audioTrack = React.createRef<HTMLAudioElement>();
-    this.state = {
+  }
 
-    }
+  state = {
+    ready: false
   }
 
   componentDidMount() {
@@ -54,7 +55,11 @@ class Visualizer extends React.Component<VisualizerProps> {
 
   componentDidUpdate(prevProps: any) {
     if(this.props.play !== prevProps.play) {
-      this.waveform.playPause();
+      if(!this.state.ready) {
+        this.loadAudio();
+      } else {
+        this.waveform.playPause();
+      }
     }
   }
 
@@ -72,9 +77,7 @@ class Visualizer extends React.Component<VisualizerProps> {
       backend: 'WebAudio', height: this.props.height ? this.props.height : 120, 
       progressColor: '#D44646', responsive: true, waveColor: '#000000', 
       cursorColor: 'transparent', barGap: this.props.barGap ? this.props.barGap : 2.5,
-      })
-
-    this.waveform.load(this.audioTrack.current);
+    })
   }
 
   getDuration() {
@@ -112,6 +115,16 @@ class Visualizer extends React.Component<VisualizerProps> {
     this.waveform.un('pause', () => {})
   }
 
+  loadAudio() {
+    this.waveform.load(this.audioTrack.current);
+    this.waveform.on('ready', () => {
+      this.setState({
+        ready: true
+      }, () => this.waveform.playPause())
+
+    });
+  }
+
   render() {
     return(
       <div className="visualizer">
@@ -121,6 +134,9 @@ class Visualizer extends React.Component<VisualizerProps> {
           ref={this.audioTrack} 
           src={`${REACT_APP_SERVER}/api/audio/play/${this.props.file}`} 
         />
+        {!this.state.ready && (
+          <p className="visualizer-text">Click play to listen</p>
+        )}
       </div>
     )
   }
