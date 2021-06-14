@@ -37,7 +37,7 @@ const Recordings = () => {
 
   const updateList = async(data: NotifyModel) => {
     try {
-      const response = await fetchAudio(data.fileName);
+      const response = await fetchAudio(data.FileName);
       const recording = parseAudioJson(response);
       console.log(recording)
       setAudioList((prevState) => [...prevState, recording]);

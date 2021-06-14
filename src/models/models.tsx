@@ -1,6 +1,6 @@
-export class NotifyModel{
-    state: any
-    fileName: any
+export interface NotifyModel{
+    State: any
+    FileName: any
 }
 
 export class AudioModel{
