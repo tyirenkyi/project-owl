@@ -73,4 +73,4 @@ You will also see any lint errors in the console.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Please refer to the [demo](https://stupefied-hamilton-53906e.netlify.app/)
+Please refer to the [demo](https://www.youtube.com/watch?v=JupjiemdmrQ)
