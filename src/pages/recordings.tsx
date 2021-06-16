@@ -152,10 +152,12 @@ const Recordings = () => {
           </div>
         )}
         {!busy && audioList.length > 0 && (
-          <div className="recordings-list">
-            {audioList.map((item, index) => (
-              <RecordingItem  data={item} key={index}/>
-            ))}
+          <div className="container-fluid">
+            <div className="row align-items-start">
+              {audioList.map((item, index) => (
+                <RecordingItem  data={item} key={index}/>
+              ))}
+            </div>
           </div>
         )}
 

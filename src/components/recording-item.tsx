@@ -52,7 +52,7 @@ const RecordingItem = (props: RecordingItemProps) => {
   }
 
   return (
-    <div className="recording-container">
+    <div className="recording-container col-3.5" style={{padding: '0'}}>
       <div 
         className={`audio-visual 
           ${props.data.priority === 'High' && 'high-priority'}
@@ -70,7 +70,7 @@ const RecordingItem = (props: RecordingItemProps) => {
       </div>
       <span className="elapsed">{displayDuration}</span>
       <div className="metadata-div">
-        <div className="metadata-column">
+        <div className="metadata-column" style={{width: '130px'}}>
           <p>Issue Type</p>
           <h5>{props.data.issue}</h5>
         </div>

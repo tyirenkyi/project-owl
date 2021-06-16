@@ -3,11 +3,11 @@
   box-shadow:  0px 0px 1px rgba(0, 0, 0, 0.02), 0px 1px 3px rgba(50, 50, 93, 0.15);
   width: 100%;
   position: relative;
-  min-width: 400px;
-  max-width: 508px;
+  min-width: 420px;
+  max-width: 500px;
   cursor: pointer;
-  margin-bottom: 30px;
-  display: inline-block;
+  padding: 0;
+  margin: 0 10px 25px 10px;
 }
 
 .audio-visual {
@@ -44,7 +44,7 @@
 .metadata-column {
   display: flex;
   flex-direction: column;
-  margin-right: 110px;
+  margin-right: 90px;
 }
 
 .metadata-column p {
@@ -116,8 +116,10 @@
   border: none;
   background: transparent;
   padding: 0;
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 12px;
+  color: #1976D2;
+  margin-left: 10px;
 }
 
 @media only screen and (max-width: 500px) {
