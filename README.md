@@ -31,9 +31,9 @@ Project Owl is a proof of concept AI powered application that aims to demonstrat
 
 The inspiration for this project is to experiment how a call center issue management system can be automated for customer serving financial institutions such as banks and fin-tech companies. 
 
-You can view the demo [here](TBD)
+You can view the demo [here](https://www.youtube.com/watch?v=JupjiemdmrQ)
 
-You can try the live application here [Live site](TBD)
+You can try the live application here [Live site](https://stupefied-hamilton-53906e.netlify.app)
   
 ### Built With
 * [Create React App](https://facebook.github.io/create-react-app/)
